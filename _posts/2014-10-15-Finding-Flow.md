@@ -28,8 +28,18 @@ The above articles are full of hope and promise, and made me feel that yes, I wa
 * [http://java.dzone.com/articles/java-8-optional-whats-point](http://java.dzone.com/articles/java-8-optional-whats-point)
 
 Consider, for example, some code from the last article in the above list (a test of code listings and syntax highlighting in github-flavored markdown):
+{% highlight js %}
+// Example can be run directly in your JavaScript console
 
-```java
+// Create a function that takes two arguments and returns the sum of those arguments
+var adder = new Function("a", "b", "return a + b");
+
+// Call the function
+adder(2, 6);
+// > 8
+{% endhighlight %}
+
+{% highlight java %}
 public static void main(String[] args) {
   OptionalTest optionalTest=new OptionalTest();
   String nullString=optionalTest.getNullString();
@@ -38,7 +48,7 @@ try {
 } catch(NullPointerException x) {
   System.out.println("Oh the humanity, a NullPointerException!");
 }
-```
+{% endhighlight %}
 
 After being away from code like this, the thought of trying to make sense of even more Java language decisions -- considering how much hair I've lost over this in the past -- made me nauseous. I don't want to go down that rabbit hole again. It just seems like an *awful* prospect.
 
