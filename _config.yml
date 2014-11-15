@@ -3,17 +3,13 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            Poole
-tagline:          The Jekyll Butler
-url:              http://getpoole.com
+title:            Computing Thoughts
+tagline:          Bruce Eckel's Programming Blog
+url:              http://bruceeckel.github.io/
 paginate:         1
 baseurl:          /
 author:
-  name:           Mark Otto
-  url:            https://twitter.com/mdo
-  email:          markdotto@gmail.com
+  name:           Bruce Eckel
+  url:            http://www.mindviewinc.com
+  email:          mindviewinc@gmail.com
 
-# Custom vars
-version:          1.0.0
-github:
-  repo:           https://github.com/poole/poole
