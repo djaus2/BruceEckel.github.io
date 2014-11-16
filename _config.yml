@@ -1,10 +1,12 @@
 # Dependencies
 #markdown:            redcarpet
+# http://www.webmaster-source.com/2013/06/26/how-to-enable-curly-quotes-in-jekyll/
 markdown: rdiscount
 rdiscount:
     extensions: ['smart']
 
-highlighter:         pygments
+#highlighter:         pygments
+highlighter:         linguist
 fenced_code_blocks:  true
 
 # Permalinks
