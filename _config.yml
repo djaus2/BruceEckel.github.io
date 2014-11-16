@@ -2,7 +2,9 @@
 markdown:            redcarpet
 highlighter:         pygments
 fenced_code_blocks:  true
-smart_quotes:  lsquo,rsquo,ldquo,rdquo
+
+kramdown:
+    smart_quotes:  lsquo,rsquo,ldquo,rdquo
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
