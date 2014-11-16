@@ -10,7 +10,7 @@ Although I do OK with uncertainty, I can't function with that much uncertainty *
 
 I've come full circle to realize that I find flow in computer programming, and in writing about programming. I've also been able to promote, and at least partially finance my writing through the world of programming. Thus it makes sense that in my search for "balancing flow" I turn back to projects like *Thinking in Java*. Is there some way I can reuse *Thinking in Java* to create both flow and income?
 
-The first obvious thing to look at is upgrading to the new, open-sourced version 8 of Java. There are other opportunities here: replacing Ant with Gradle, for example, and choosing better libraries rather than the standard libraries -- ultimately creating an improved hybrid of Java by picking and choosing best-of-breed tools and libraries.
+The first obvious thing to look at is upgrading to the new, open-sourced version 8 of Java. There are other opportunities here: replacing Ant with Gradle, for example, and choosing better libraries rather than the standard libraries --- ultimately creating an improved hybrid of Java by picking and choosing best-of-breed tools and libraries.
 
 This sounded good but I immediately encountered a problem when I started researching the Java 8 language itself. Here's a set of articles that give an overview of what's new and different in Java 8:
 
@@ -40,7 +40,7 @@ try {
 }
 ```
 
-After being away from code like this, the thought of trying to make sense of even more Java language decisions -- considering how much hair I've lost over this in the past -- made me nauseous. I don't want to go down that rabbit hole again. It just seems like an *awful* prospect.
+After being away from code like this, the thought of trying to make sense of even more Java language decisions --- considering how much hair I've lost over this in the past --- made me nauseous. I don't want to go down that rabbit hole again. It just seems like an *awful* prospect.
 
 An intermediate approach would be to select the features that I think produce a positive cost-benefit for Java 8. That is, the pain of learning/using those new features is low and the benefits are useful enough. Teach those, and then say "if you want/need to go beyond this, you should consider just switching to [Scala](http://www.AtomicScala.com)." On top of that, as a build system, use Gradle instead of Ant or Maven, and find the simplest testing framework and in general use the best available libraries rather than just using what comes "in the box" when you install the JDK.
 
@@ -52,7 +52,7 @@ During last couple of years at the at the [Java Posse Roundup](http://www.mindvi
 
 Also, the upcoming version of Android [looks very interesting](http://developer.android.com/preview/index.html). Android does seem to be pushing device programming forward more than anyone (although I'm definitely a fan of [Apple's new Swift language](http://www.artima.com/weblogs/viewpost.jsp?thread=361253)).
 
-But then James Ward pointed out that the recent loss of the Oracle lawsuit could throw quite a wrench in Android, perhaps even stimulating Google to change development languages, possibly even to Google's own (open-source) Go language. I read one post that claimed this would be too big a project, but of any company, Google seems the most likely to undertake such a project, especially considering the money they'd otherwise be handing over to Oracle -- why not spend that money on changing languages instead?
+But then James Ward pointed out that the recent loss of the Oracle lawsuit could throw quite a wrench in Android, perhaps even stimulating Google to change development languages, possibly even to Google's own (open-source) Go language. I read one post that claimed this would be too big a project, but of any company, Google seems the most likely to undertake such a project, especially considering the money they'd otherwise be handing over to Oracle --- why not spend that money on changing languages instead?
 
 I need more data before considering that road, and Google isn't talking.
 
@@ -62,7 +62,7 @@ Every time someone asks me what my favorite language is, assuming I'll say C++ o
 
 And in terms of the ratio of programming power per lines of code, Python is right up there at the top, while retaining strong readability. That certainly fits with my mission of greater leverage.
 
-Years ago I started working on [a Python book](http://www.mindviewinc.com/Books/Python3Patterns/Index.php), which was to be an open-source project with group participation -- an experiment. After several different (failing, but informative) attempts at using participation systems, I got sidetracked. Would this book be a useful contribution to the Python community? Is a book even the best pursuit?
+Years ago I started working on [a Python book](http://www.mindviewinc.com/Books/Python3Patterns/Index.php), which was to be an open-source project with group participation --- an experiment. After several different (failing, but informative) attempts at using participation systems, I got sidetracked. Would this book be a useful contribution to the Python community? Is a book even the best pursuit?
 
 I also need to (in the spirit of [Start with Why](https://startwithwhy.com)) revisit why writing a book is even a thing to do. My original motivation for writing books about programming was to market myself as a consultant, and then books became a thing of their own. If I was to do programming work, my first choice would be working in Python, and if that's what I'd like to do, perhaps there's a more expedient way to get that kind of work.
 
@@ -70,13 +70,13 @@ I also need to (in the spirit of [Start with Why](https://startwithwhy.com)) rev
 
 Another attractive possibility is [Kotlin](http://kotlinlang.org/), an open-source language being created with support by JetBrains, a company with an excellent track record of paying attention to the needs of the mainstream programmer.
 
-A major reason Kotlin is appealing is that it has much in common, syntactically, with Scala, but without the dark corners -- nay, dark pits ("fly, you fools!") -- which may ultimately isolate Scala to the world of *experts only*. So it looks like I could do a translation of *Atomic Scala* to *Atomic Kotlin* which "might not require too much effort" (words I have regretted numerous times in my career). And then see what happens, before committing a major effort to the language.
+A major reason Kotlin is appealing is that it has much in common, syntactically, with Scala, but without the dark corners --- nay, dark pits ("fly, you fools!") --- which may ultimately isolate Scala to the world of *experts only*. So it looks like I could do a translation of *Atomic Scala* to *Atomic Kotlin* which "might not require too much effort" (words I have regretted numerous times in my career). And then see what happens, before committing a major effort to the language.
 
 At the upcoming [Geecon conference in Prague](http://geecon.cz/), I'm hoping to meet with the Kotlin developers and find out what kind of support they might offer for such a project.
 
 ## A Build System ##
 
-Here's something I keep coming back to: I've been using -- and been kind of fascinated with (because of their productivity potential) -- build tools since pretty much the beginning of my professional career. Not that I can say I ever felt like I mastered any of them, but some, like **make** and **ant**, I used enough to see where they started dropping the ball.
+Here's something I keep coming back to: I've been using --- and been kind of fascinated with (because of their productivity potential) --- build tools since pretty much the beginning of my professional career. Not that I can say I ever felt like I mastered any of them, but some, like **make** and **ant**, I used enough to see where they started dropping the ball.
 
 I've also created my own build systems. The most recent one was for *Atomic Scala*, built in Python, to be reasonably simple. And it worked OK.
 
@@ -102,7 +102,7 @@ There were a few more articles that were published in Micro Cornucopia since the
 
 ## In the Short Term: Atomic Scala ##
 
-[Atomic Scala](http://www.atomicscala.com/) has been out long enough that there's a new point release that has produced some small changes to the book, along with the numerous accumulated edits that accumulate once you've "put the manuscript in a drawer" for awhile -- you read it again and a lot of corrections and rewrites jump out at you. I've had a number of people report bugs, mostly in the exercises and solutions.
+[Atomic Scala](http://www.atomicscala.com/) has been out long enough that there's a new point release that has produced some small changes to the book, along with the numerous accumulated edits that accumulate once you've "put the manuscript in a drawer" for awhile --- you read it again and a lot of corrections and rewrites jump out at you. I've had a number of people report bugs, mostly in the exercises and solutions.
 
 In addition, I've started getting requests for foreign-language translation rights, and I'd like the project to be tuned up before someone goes to the effort of a translation.
 
