@@ -1,8 +1,8 @@
 ![Silvrback blog image sb_float](https://silvrback.s3.amazonaws.com/uploads/8fc6d334-3a73-4099-aea0-468792efd997/Painting2_medium.png)
 
-## Balancing Uncertainty via Concrete Projects ##
-
 **(*This post is an experiment to test a new blogging platform.* This version is just straight out of MarkdownPad into Github pages, with no intermediate static site generator)**
+
+## Balancing Uncertainty via Concrete Projects ##
 
 The [Reinventing Business](http://www.reinventing-business.com/) project is my "own personal Everest to climb," my project that, once I saw it, I couldn't unsee. It's also very unclear whether I will ever make any significant breakthroughs in that area. 
 
