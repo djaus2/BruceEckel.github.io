@@ -1,10 +1,6 @@
----
-layout: post
-title: Finding Flow: Balancing Uncertainty via Concrete Projects
----
-
 ![Silvrback blog image sb_float](https://silvrback.s3.amazonaws.com/uploads/8fc6d334-3a73-4099-aea0-468792efd997/Painting2_medium.png)
 
+## Balancing Uncertainty via Concrete Projects ##
 
 **(*This post is an experiment to test a new blogging platform.* This version is just straight out of MarkdownPad into Github pages, with no intermediate static site generator)**
 
