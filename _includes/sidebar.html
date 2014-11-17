@@ -9,38 +9,18 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
-    <a class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php">About</a>
-
     {% for post in site.posts %}
-      {% comment %}
-      * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
-      {% endcomment %}
       <a class="sidebar-nav-item" href="{{ post.url }}">{{ post.date | date_to_string }} &raquo; {{ post.title }}</a>
     {% endfor %}
 
-
-    {% comment %}
-      The code below dynamically generates a sidebar nav of pages with
-      `layout: page` in the front-matter. See readme for usage.
-    {% endcomment %}
-
-    {% assign pages_list = site.pages | sort:"url" %}
-    {% for node in pages_list %}
-      {% if node.title != null %}
-        {% if node.layout == "page" %}
-          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-
-    <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-    <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
+    <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
+    <a class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>
+    <a class="sidebar-nav-item" href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
   </nav>
 
   <div class="sidebar-item">
     <p>
-      &copy; {{ site.time | date: '%Y' }}. All rights reserved.
+      &copy; {{ site.time | date: '%Y' }} Mindview LLC. All rights reserved.
     </p>
   </div>
 </div>
