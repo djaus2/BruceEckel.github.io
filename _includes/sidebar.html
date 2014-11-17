@@ -12,6 +12,13 @@
     <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
     <a class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php">About</a>
 
+    ## Blog Posts
+
+    {% for post in site.posts %}
+      * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
+    {% endfor %}
+
+
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
       `layout: page` in the front-matter. See readme for usage.
