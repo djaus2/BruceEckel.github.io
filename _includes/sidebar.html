@@ -13,7 +13,10 @@
     <a class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php">About</a>
 
     {% for post in site.posts %}
+      {% comment %}
       * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
+      {% endcomment %}
+      <a class="sidebar-nav-item" href="{{ post.url }}">{{ post.date | date_to_string }} &raquo; {{ post.title }}</a>
     {% endfor %}
 
 
