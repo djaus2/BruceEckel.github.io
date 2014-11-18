@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Finding Flow
 subtitle: Balancing Uncertainty via Concrete Projects
+title: Finding Flow
 ---
 ![Silvrback blog image sb_float](https://silvrback.s3.amazonaws.com/uploads/8fc6d334-3a73-4099-aea0-468792efd997/Painting2_medium.png)
 
-**(*This post is an experiment to test a new blogging platform.* This version is just straight out of MarkdownPad into Github pages, with no intermediate static site generator)**
+**(*This post is an experiment to test a new blogging platform.* This version is just straight out of MarkdownPad into Github pages, with no other software on my local machine)**
 
 ## Balancing Uncertainty via Concrete Projects ##
 
 The [Reinventing Business](http://www.reinventing-business.com/) project is my "own personal Everest to climb," my project that, once I saw it, I couldn't unsee. It's also very unclear whether I will ever make any significant breakthroughs in that area. 
 
-Although I do OK with uncertainty, I can't function with that much uncertainty *all* the time (or perhaps it's something one learns through experience). I need to balance the thing where I don't know much of anything, with something where I have a pretty good grasp,and way of figuring things out. One person observed that I am "looking for flow."
+Although I do OK with uncertainty, I can't function with that much uncertainty *all* the time (or perhaps it's something one learns through experience). I need to balance the thing where I don't know much of anything, with something where I have a pretty good grasp, and way to figure things out. One person observed that the latter suggests I am "looking for flow."
 
 I've come full circle to realize that I find flow in computer programming, and in writing about programming. I've also been able to promote, and at least partially finance my writing through the world of programming. Thus it makes sense that in my search for "balancing flow" I turn back to projects like *Thinking in Java*. Is there some way I can reuse *Thinking in Java* to create both flow and income?
 
@@ -77,7 +77,7 @@ Another attractive possibility is [Kotlin](http://kotlinlang.org/), an open-sour
 
 A major reason Kotlin is appealing is that it has much in common, syntactically, with Scala, but without the dark corners --- nay, dark pits ("fly, you fools!") --- which may ultimately isolate Scala to the world of *experts only*. So it looks like I could do a translation of *Atomic Scala* to *Atomic Kotlin* which "might not require too much effort" (words I have regretted numerous times in my career). And then see what happens, before committing a major effort to the language.
 
-At the upcoming [Geecon conference in Prague](http://geecon.cz/), I'm hoping to meet with the Kotlin developers and find out what kind of support they might offer for such a project.
+During the [Scala Summit](http://www.scalasummit.com) a group of us explored Kotlin; my goal was to see if anything jumped out at me arguing against writing about the language --- nothing did. At the recent [Geecon conference in Prague](http://geecon.cz/), I met with some of the Jebrains folks to find out what kind of support they might offer for such a project --- they seem enthusiastic, so this is a very promising avenue I will continue to pursue.
 
 ## A Build System ##
 
@@ -107,7 +107,7 @@ There were a few more articles that were published in Micro Cornucopia since the
 
 ## In the Short Term: Atomic Scala ##
 
-[Atomic Scala](http://www.atomicscala.com/) has been out long enough that there's a new point release that has produced some small changes to the book, along with the numerous accumulated edits that accumulate once you've "put the manuscript in a drawer" for awhile --- you read it again and a lot of corrections and rewrites jump out at you. I've had a number of people report bugs, mostly in the exercises and solutions.
+[Atomic Scala](http://www.atomicscala.com/) has been out long enough that there's a new Scala point release that has produced some small changes to the book, along with the numerous accumulated edits that accumulate once you've "put the manuscript in a drawer" for awhile --- you read it again and a lot of corrections and rewrites jump out at you. I've had a number of people report bugs, mostly in the exercises and solutions.
 
 In addition, I've started getting requests for foreign-language translation rights, and I'd like the project to be tuned up before someone goes to the effort of a translation.
 
