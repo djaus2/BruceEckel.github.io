@@ -9,9 +9,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a href="{{ site.baseurl }}">Home</a>
-    <a href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>
-    <a href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
+    <a href="{{ site.baseurl }}">Home</a>&nbsp;<a href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>&nbsp;<a href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
     {% for post in site.posts %}
       <a class="sidebar-nav-item" href="{{ post.url }}">{{ post.date | date_to_string }} &raquo; {{ post.title }}</a>
     {% endfor %}
