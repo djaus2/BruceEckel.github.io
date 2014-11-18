@@ -9,9 +9,9 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a style="display:inline;" class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
-    <a style="display:inline;" class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>
-    <a style="display:inline;" class="sidebar-nav-item" href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
+    <a style="display:run-in;" class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
+    <a style="display:run-in;" class="sidebar-nav-item" href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>
+    <a style="display:run-in;" class="sidebar-nav-item" href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
     {% for post in site.posts %}
       <a class="sidebar-nav-item" href="{{ post.url }}">{{ post.date | date_to_string }} &raquo; {{ post.title }}</a>
     {% endfor %}
