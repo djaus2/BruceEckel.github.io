@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Finding Flow
+subtitle: Balancing Uncertainty via Concrete Projects
 ---
 ![Silvrback blog image sb_float](https://silvrback.s3.amazonaws.com/uploads/8fc6d334-3a73-4099-aea0-468792efd997/Painting2_medium.png)
 
