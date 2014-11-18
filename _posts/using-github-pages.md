@@ -51,7 +51,7 @@ with open(postname, 'w') as f:
 os.startfile(postname) # Windows only, but there's a Mac equivalent
 ```
 
-Because this program is typically started from the explorer, to get input (the name of the post) I decided to try using a popup window dialog. After playing around for awhile I discovered the [EasyGUI library](http://easygui.sourceforge.net/), which reduces an input dialog box to a single line, although you do have to install the external library. If this doesn't work for you, you can replace it with Python's **raw_input()**. If you don't want to install an external package, you can use Python's built-in **TkInter** library, here's a simple example (**TkInterInputWindow.bat** in the Github repository):
+Because this program is typically started from the explorer, to get input (the name of the post) I decided to try using a popup window dialog. After playing around for awhile I discovered the [EasyGUI library](http://easygui.sourceforge.net/), which reduces an input dialog box to a single line, although you do have to install the external library. When I found it, the site declared it a non-maintained project, although it did work. If EasyGUI doesn't work for you, you can replace it with Python's **raw_input()**. If you don't want to install an external package, you can use Python's built-in **TkInter** library, here's a simple example (**TkInterInputWindow.bat** in the Github repository):
 
 ```python
 @setlocal enabledelayedexpansion && python -x "%~f0" %* & exit /b !ERRORLEVEL!
