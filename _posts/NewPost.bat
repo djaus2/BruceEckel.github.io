@@ -1,15 +1,19 @@
 @setlocal enabledelayedexpansion && python -x "%~f0" %* & exit /b !ERRORLEVEL!
-#start python code here
-import os
+#start python code here (tested on Python 2.7.4)
+import os, string, datetime
 import easygui # to install: pip install EasyGUI
+
 result = easygui.enterbox(msg="Blog Post Title", title="Name query")
-print result
+postname = result.lower().strip().replace(" ", "-")
+postname = datetime.date.today().strftime("%Y-%m-%d-") + postname + ".md"
 
-slugline = """
----
+slugline = """---
 layout: post
-title: What's Jekyll?
+title: %s
 ---
-"""
+""" % string.capwords(result)
 
-os.startfile("2013-12-31-whats-jekyll.md")
+with open(postname, 'w') as f:
+    f.write(slugline)
+
+os.startfile(postname) # Windows only
