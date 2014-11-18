@@ -115,7 +115,7 @@ So, regardless of what the next-next project is, I've started on a second editio
 
 Now that I've started the project, I've found that it really *is* satisfying to have my hands on something concrete. And it's an important realization that with most/all languages I've written about, there are significant design decisions that made me grit my teeth and grumble etc. Now that I'm looking at programming activities as a vacation from struggling with the vast vagaries of Reinventing Business, I realize I don't want to be working with something that I'm griping about; I'm getting more interested in languages that are designed to make things easier for the average programmer.
 
-**Note:** If you get the current Atomic Scala eBook, you'll automatically get the update. Alas, the print books are too expensive to do this with, so if you really want the print book right now, you can come back when the second edition is ready and download the changes as an HTML page.
+**Note:** If you get the current [Atomic Scala eBook](http://www.atomicscala.com/ebook), you'll automatically get the update. Alas, the print books are too expensive to do this with, so if you really want the [print book](http://www.atomicscala.com/order-book) right now, you can come back when the second edition is ready and download the changes as an HTML page.
 
 ## Let's Think About This ##
 
