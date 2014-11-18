@@ -16,4 +16,4 @@ title: %s
 with open(postname, 'w') as f:
     f.write(slugline)
 
-os.startfile(postname) # Windows only
+os.startfile(postname) # Windows only, but there's a Mac equivalent
