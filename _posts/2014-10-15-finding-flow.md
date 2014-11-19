@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: True
 subtitle: Balancing Uncertainty via Concrete Projects
 title: Finding Flow
 ---
