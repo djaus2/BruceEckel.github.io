@@ -6,7 +6,8 @@ layout: default
   <h1 class="post-title">{{ page.title }}</h1>
   <span class="post-date">{{ page.date | date_to_string }}</span>
   {{ content }}
-  {% include /_includes/disqus.html %}
+  {% include disqus.html %}
+  {% include test.html %}
 </div>
 {% comment %}
 <div class="related">
