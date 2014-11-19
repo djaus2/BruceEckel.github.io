@@ -3,7 +3,7 @@ layout: post
 title: Using Github Pages for Blogging
 ---
 
-I've wanted to move my programming blog away from [Artima](http://www.artima.com/weblogs/index.jsp?blogger=beckel) for what seems like several years now (Here's an [earlier update on the process](http://www.artima.com/weblogs/viewpost.jsp?thread=361740)). My buddy Bill hasn't found developing the blogging platform to be of much interest anymore, and in particular he realizes there are many better alternatives at this point.
+I've wanted to move this programming blog away from [Artima](http://www.artima.com/weblogs/index.jsp?blogger=beckel) for what seems like several years now (Here's an [earlier update on the process](http://www.artima.com/weblogs/viewpost.jsp?thread=361740)). My buddy Bill hasn't found developing the blogging platform to be of much interest anymore, and in particular he realizes there are many better alternatives at this point.
 
 The conversion took a surprising amount of research, partly because I've been away from the idea of blogging technology for quite awhile. Initially I hosted my own blogs on my own site, writing the necessary code by hand. Eventually I moved to [Artima](http://www.artima.com/weblogs/index.jsp?blogger=beckel) and relied on that site to provide the blogging framework. I've mostly skipped the need for Wordpress, although [www.AtomicScala.com](http://www.atomicscala.com/) is a Wordpress site. Wordpress and PHP have moved the web , so they deserve credit for that, but for me Wordpress requires too much fiddling --- and that requires a mental shift that I find too disruptive when I'm trying to write a post.
 
