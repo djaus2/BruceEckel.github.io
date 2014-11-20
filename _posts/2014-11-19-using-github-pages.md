@@ -27,12 +27,14 @@ No search function comes with Jekyll, so I added [Simple Jekyll Search](https://
 
 I also added Disqus for discussions, by following [this article](http://joshualande.com/jekyll-github-pages-poole/). This turned out to be a puzzler, because the article said to modify the **post.html** file, which I did, and I couldn't see the results and started thinking something was broken. Only after thrashing around with it did I realize that **post.html** is only used when you are displaying a single isolated post, but the main page uses **default.html**. This despite the fact that the YAML header in each post specifies **layout:post**, which supposedly says to use **post.html** for display.
 
-But it doesn't stop there --- both **post.html** and **default.html** use {% raw %}**{{ content }}**{% endraw %} to include the body of the post, but with **post.html**, that includes a single post while **default.html** includes all the posts on that page (5 per page in my case), with apparently no way to insert anything in between each post, including any Disqus info or even a message that says "go to the single isolated post page in order to read/post comments." This seemed a little bizarre and restrictive. There's a bit of a [rant on the Jekyll Bootstrap site](http://jekyllbootstrap.com/lessons/jekyll-introduction.html#toc_16) explaining that this is because of the Liquid Templating Engine, and saying that it's not worth fighting it. So I was ready to give up.
+But it doesn't stop there --- both **post.html** and **default.html** use {% raw %}**{{ content }}**{% endraw %} to include the body of the post, but with **post.html**, that includes a single post while **default.html** includes all the posts on that page (5 per page in my case), with apparently no way to insert anything in between each post, including any Disqus info or even a message that says "go to the single isolated post page in order to read/post comments." This seemed a little bizarre and restrictive. There's a bit of a [rant on the Jekyll Bootstrap site](http://jekyllbootstrap.com/lessons/jekyll-introduction.html#toc_16) explaining that this is because of the Liquid Templating Engine, and saying that it's not worth fighting it. So I was ready to give up. (After all this I have no problem with the Liquid engine; I find the syntax very intuitive).
 
 But then I started searching around and discovered that **index.html** in the root directory is what creates the list that goes into the **default.html** {% raw %}**{{ content }}**{% endraw %} tag. So I put the following:
 
 ```html
-    <a href="{{ post.url }}#disqus_thread">View or add comments</a>
+{% raw %}
+<a href="{{ post.url }}#disqus_thread">View or add comments</a>
+{% endraw %}
 ```
 After the {% raw %}**{{ post.content }}**{% endraw %} tag, which allows people to click on the main page and go directly to the comments section on the individual post page.
 
@@ -44,7 +46,7 @@ One more simplification step remained. Jekyll requires you to name your posts in
 
 I still have my old Macbook for testing, but other than that I've [moved back to Windows](http://www.artima.com/weblogs/viewpost.jsp?thread=350864), so this Python script takes advantage of that. If you want to use it on a Mac it should work fine with a couple of changes.
 
-One approach I've become fond of is creating a Windows .BAT file for running Python programs, especially after discovering the one-liner you'll see at the top of the file which converts any Python program into a batch file, so you can just run it by double-clicking from the Windows explorer. Here's the file **NewFile.bat**:
+One approach I've become fond of is creating a Windows .BAT file for running Python programs, especially after discovering the one-liner you'll see at the top of the following file, which converts any Python program into a batch file, so you can just run it by double-clicking from the Windows explorer. Here's the file **NewFile.bat**:
 
 ```python
 @setlocal enabledelayedexpansion && python -x "%~f0" %* & exit /b !ERRORLEVEL!
@@ -86,6 +88,6 @@ raw_input()
 ```  
 This is certain not as clear as the one-liner in the **EasyGUI** approach. The **raw_input()** at the end is just to hold the program open so you can see the output of the prior **print** statement.
 
-To summarize, I really like Jekyll on Github pages. Not only does it feel wrong from an architecture standpoint to store blog posts in a database and do lots of dynamic generation for a site that could be simple files statically served, but the heavyweight nature of CMS systems tends, I believe, to more readily accumulate technical debt. Perhaps more importantly, sites on CMS systems like Wordpress have a certain last-generation feel to them. Perhaps it's because the static site generators seem to predominantly come from the Ruby world, or maybe there's some other reason, but sites like this seem to have a fresher, cleaner feel as well.
+To summarize, I really like Jekyll on Github pages. Not only does it feel wrong from an architecture standpoint to store blog posts in a database and do lots of dynamic generation for a site that could be simple files statically served, but the heavyweight nature of CMS systems tend, I believe, to more readily accumulate technical debt. Perhaps more importantly, sites on CMS systems like Wordpress have a certain last-generation feel to them. Perhaps it's because the static site generators seem to predominantly come from the Ruby world, or maybe there's some other reason, but sites like this seem to have a fresher, cleaner feel as well.
 
 Finally, it appeals to the programmer in me to understand how the site works, and to be able to go in and tweak it without having to understand the details of something like Wordpress. The fact that all my blog posts and site customizations are archived in Github is a significant plus.
