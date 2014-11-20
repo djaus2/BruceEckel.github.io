@@ -9,9 +9,10 @@ postname = datetime.date.today().strftime("%Y-%m-%d-") + postname + ".md"
 
 slugline = """---
 layout: post
-comments: True
+published: false
 title: %s
 ---
+
 """ % string.capwords(result)
 
 with open(postname, 'w') as f:

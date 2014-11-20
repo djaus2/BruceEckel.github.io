@@ -123,3 +123,4 @@ Now that I've started the project, I've found that it really *is* satisfying to 
 Although Atomic Scala is the obvious first choice, after that I'd really like to consider whether a choice is *right* before just diving in. Making money is nice and it helps support my other endeavors (mostly *Reinventing Business* at this point), but if something is not inspiring, or worse, an energy suck, then I'd rather make a different choice, because unless these things truly support my "why" in multiple ways, then I'm backsliding.
 
 Thanks for listening.
+
