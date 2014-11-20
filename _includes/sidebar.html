@@ -1,3 +1,10 @@
+<!-- Google search function -->
+<script language="Javascript" type="text/javascript">
+  function search_google() {
+    var query = document.getElementById("google-search").value;
+    window.open("http://google.com/search?q=" + query + "%20site:" + "http://bruceeckel.github.io");
+  }
+</script>
 <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
      styles, `#sidebar-checkbox` for behavior. -->
 <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
@@ -11,6 +18,7 @@
   <nav class="sidebar-nav">
     <div class="sidebar-nav-item">
     <a href="{{ site.baseurl }}">Home</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.mindviewinc.com/About/Bruce.php" target="_blank">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.mindviewinc.com" target="_blank">Mindview LLC</a>
+    Search: <form onsubmit="search_google()" ><input type="text" id="google-search"></form>
     </div>
     {% for post in site.posts %}
       <a class="sidebar-nav-item" href="{{ post.url }}">{{ post.date | date_to_string }} &raquo; {{ post.title }}</a>

@@ -21,7 +21,7 @@ Using Github Pages, you create a Github repository for your blog, unpack the Jek
 
 I further customized my site by using the [Lanyon Theme](https://github.com/poole/lanyon#readme) based on [Poole](http://getpoole.com/). This produces the very stylistically-simple effect you see here, with a drawer-sidebar on the left side which I've customized to include my own links as well as a list of blog posts. Code listings required a bit of configuration to get right, as did round quotes and apostrophes. Rather than describe how to do this, I'll just point you to the [Github repository for the site](https://github.com/BruceEckel/BruceEckel.github.io) --- because I'm using free Github hosting (no private repositories), the whole site is available for download so you can just look at the sources (and the changes I will do in the future after posting this article) to see what I've done.
 
-No search function comes with Jekyll, so I added [Simple Jekyll Search](https://github.com/christian-fei/Simple-Jekyll-Search) to my sidebar.
+No search function comes with Jekyll. I looked [Simple Jekyll Search](https://github.com/christian-fei/Simple-Jekyll-Search), but it only seems to search the post titles. So I follow the instructions in [this article](http://truongtx.me/2012/12/28/jekyll-create-simple-search-box/), but just pasted the code directly into **sidebar.html**. Within five minutes I had implemented search. 
 
 ## Bumbling Around to Make Disqus Work ##
 
