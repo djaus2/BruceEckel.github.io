@@ -90,7 +90,7 @@ title = askstring('Blog Post Title', 'Title')
 print title
 raw_input()
 ```  
-This is certain not as clear as the one-liner in the **EasyGUI** approach. The **raw_input()** at the end is just to hold the program open so you can see the output of the prior **print** statement.
+This is certainly not as clear as the one-liner in the **EasyGUI** approach. The **raw_input()** at the end is just to hold the program open so you can see the output of the prior **print** statement.
 
 To summarize, I really like Jekyll on Github pages. Not only does it feel wrong from an architectural standpoint to store blog posts in a database and do lots of dynamic generation for a site that could be simple files statically served, but the heavyweight nature of CMS systems tend, I believe, to more readily accumulate technical debt. Perhaps more importantly, sites on CMS systems like Wordpress have a certain last-generation feel to them. Perhaps it's because the static site generators seem to predominantly come from the Ruby world, or maybe there's some other reason, but sites like this seem to have a fresher, cleaner feel as well.
 
