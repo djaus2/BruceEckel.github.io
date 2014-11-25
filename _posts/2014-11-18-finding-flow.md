@@ -88,6 +88,8 @@ Rust is an open-source project so I don't expect it to go away, and will continu
 
 Back in C++ days before the STL, I would create various libraries, like **vector** and **list** and **map**, and include them in my early C++ books and articles. I ended up building these from scratch, again and again, and each time I saw them differently, and better, precisely because I was starting over again. I think this is happening with languages now, because the tools and foundations have gotten better, and we've gotten better at designing and implementing them. As a result, we are moving away from being stuck in old language paradigms and instead shaking them off, and moving towards languages that are not mired in compromise. Someday programmers will look back at this time and see what we struggled with, and what held us back.
 
+[Nim](http://nimrod-lang.org/) is another new language which, like Rust, compiles to native and appears to learn from its predecessors. There are bindings to other languages, including Python, in the standard distribution.
+
 ## Kotlin ##
 
 Another attractive possibility is [Kotlin](http://kotlinlang.org/), an open-source language being created with support by JetBrains, a company with an excellent track record of paying attention to the needs of the mainstream programmer.
