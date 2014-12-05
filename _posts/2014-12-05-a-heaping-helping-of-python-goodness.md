@@ -146,6 +146,8 @@ Then I discovered that **format()** could take a dictionary and parse through it
 ```
 Where **cf** is the configuration dictionary.
 
+(It turns out that I could also have left everything as global variables and passed **\*\*globals()**).
+
 This worked OK for awhile, but then I started to get bothered by having to write:
 
 ```python
