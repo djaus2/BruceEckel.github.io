@@ -140,19 +140,23 @@ I'm reading [Writing Idiomatic Python](https://www.jeffknupp.com/writing-idiomat
 "My string with {THING_TO_SUBSTITUTE} in it".format(THING_TO_SUBSTITUTE=THING_TO_SUBSTITUTE)
 ```
 Then I discovered that **format()** could take a dictionary and parse through it to find your particular arguments, and substitute those. So, if I put everything in a single dictionary, I could just pass that in to any **format()** like this:
+
 ```python
 "My string with {THING_TO_SUBSTITUTE} in it".format(**cf)
 ```
 Where **cf** is the configuration dictionary.
 
 This worked OK for awhile, but then I started to get bothered by having to write:
+
 ```python
 cf["THING_TO_SUBSTITUTE"]
 ```
 Everywhere. Too many characters, too noisy to write and read. What I wanted was the much simpler:
+
 ```python
 cf.THING_TO_SUBSTITUTE
 ```
+
 I discovered that by writing a quick subclass of **dict** I could accomplish this, and the results are:
 
 ```python
