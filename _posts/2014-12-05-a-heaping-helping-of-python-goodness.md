@@ -9,7 +9,7 @@ My favorite tricks are small bits of learning that make code easier to write, re
 
 ## 1. Turn a Python Program into a Windows Batch File ##
 
-I'm lazy and I don't like typing more than I have to. Even better is to just double-click on a thing from the Windows Explorer. I've tried doing this in the past but it was ugly and I always had to fiddle around with it, so when I found a universal solution on the Internet I was quite pleased. So far, putting the first line at the top of a batch file has worked everywhere I've tried it:
+I'm lazy and I don't like typing more than I have to. Even better is to just double-click on a thing from the Windows Explorer. I've tried doing this with Windows .BAT files in the past but it was ugly and I always had to fiddle around with it, so when I found a universal solution on the Internet I was quite pleased. So far, putting the first line at the top of a batch file has worked everywhere I've tried it:
 
 ```python
 @setlocal enabledelayedexpansion && python -x "%~f0" %* & exit /b !ERRORLEVEL!
