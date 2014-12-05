@@ -19,7 +19,7 @@ It has the additional benefit that generic scripts are easily adaptable for non-
 
 ## 2. "with" and the Context Manager ##
 
-The **with** keyword has been in Python for awhile now; the simplest way of thinking about it is that it sets up a **try-finally** block for you. One of the things I love most about Python is that the language designers pay attention to the little things that people do over and over and think "hey, maybe we can make this better!" So sure, you can write your own **try-finally** blocks to do this, but if it gets too messy you won't.
+The `with` keyword has been in Python for awhile now; the simplest way of thinking about it is that it sets up a **try-finally** block for you. One of the things I love most about Python is that the language designers pay attention to the little things that people do over and over and think "hey, maybe we can make this better!" So sure, you can write your own **try-finally** blocks to do this, but if it gets too messy you won't.
 
 Here, I just wanted to visit a directory, do something, and come back. I found myself doing this in numerous places in the program, so to prevent errors and make the code clearer, I decided to try to do the repetitive activity in one place.
 
