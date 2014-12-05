@@ -49,7 +49,7 @@ The program just visits each directory one level down from the current one and p
 
 Because of the simplicity of the **contextmanager** decorator, I'm going to be using **with** statements a lot more now.
 
-## 3. Command-line Arguments with argparse ##
+## 3. Command-line Arguments with `argparse` ##
 
 In the past, I've tried to use **optparse** but it always ended up feeling too messy and complicated, so I'd just punt and pick the arguments off the command line myself. Apparently powers that be observed this happening enough that someone decided to create a simpler, better command-line parsing module. I finally reached for [argparse](http://pymotw.com/2/argparse/) this week, and I'm now a convert --- argument parsing has become easy, and I won't hesitate to put it into future programs.
 
@@ -130,7 +130,7 @@ One caveat: we were able to do everything using Python's "batteries included" li
 
 But wait, there's more! PyInstaller does this magic for different operating systems! Not just Windows, but Linux and Mac OSX. You can read more [here](http://pythonhosted.org/PyInstaller/#overview-what-pyinstaller-does-and-how-it-does-it).
 
-## 5. Simplifying Configuration, and format() ##
+## 5. Simplifying Configuration, and `format()` ##
 
 Because James started with a **bash** script and he hasn't done a lot of bash programming, he followed the bad bash practice of using global variables all over the place, which you see as all uppercase identifiers. I took his script and translated it to Python which we then built into a Windows .EXE file.
 
