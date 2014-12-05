@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: A Heaping Helping Of Python Goodness
 ---
 I really enjoy solving problems quickly and thoroughly. I especially enjoy solving annoying, repetitive problems that invite human error. The icing on the cake is when I learn some new tricks in the process. This last few days was a flurry of problem-solving and trick-learning.
@@ -45,13 +45,13 @@ for p in paths:
         for f in glob('*'):
             print "   ", f
 ```
-The program just visits each directory one level down from the current one and prints the contents.
+The program just visits each directory one level down from the current one and prints the contents. Notice that **old** is held through the **yield** and used to restore the old directory.
 
 Because of the simplicity of the **contextmanager** decorator, I'm going to be using **with** statements a lot more now.
 
 ## 3. Command-line Arguments with argparse ##
 
-In the past, I've tried to use **optparse** but it always ended up feeling too messy and complicated, so I'd just punt and pick the arguments off the command-line myself. Apparently powers that be observed this happening enough that someone decided to create a simpler, better command-line parsing module. I finally reached for [argparse](http://pymotw.com/2/argparse/) this week, and I'm now a convert --- argument parsing has become easy, and I won't hesitate to put it into future programs.
+In the past, I've tried to use **optparse** but it always ended up feeling too messy and complicated, so I'd just punt and pick the arguments off the command line myself. Apparently powers that be observed this happening enough that someone decided to create a simpler, better command-line parsing module. I finally reached for [argparse](http://pymotw.com/2/argparse/) this week, and I'm now a convert --- argument parsing has become easy, and I won't hesitate to put it into future programs.
 
 Here's a simple example that only uses optional flags, which can come in a single-hyphen short form or a double-hyphen long form:
 
@@ -120,8 +120,93 @@ You'll notice that the arguments make this look like a kind of build program, wh
 
 Here's another problem that I've poked at for years --- well, looked at and decided it was too much trouble. And this week, discovered that someone has made it easy with [PyInstaller](https://github.com/pyinstaller/pyinstaller/wiki).
 
-James needed the Windows installer to be dead simple
+My friend James Ward asked me to help him create a tool installer. He had written the Mac/Linux version as a **bash** script, and he needed the Windows version of the installer to be dead simple --- the tool is currently messy and fiddly to install, and he wants to use it in a classroom situation and elsewhere, so the out-of-the-box install process must be non-obtrusive, otherwise people won't want to bother with it. I like making things simple and I'm annoyed when they are stupidly difficult, so I decided to step up and help.
 
-## Simplifying Configuration ##
+His initial thought was to make a Windows BAT file, but when I saw what he was trying to do I suggested that might produce too much hair pulling (James did write a support script with BAT and getting that to work wasted a lot of time). We briefly considered Visual Basic, which I've had some experience with, but then I wondered if the tools for creating Windows .EXE files from Python might have progressed to the point of ease.
+
+And indeed they have --- PyInstaller worked the first time and every time. It has a **--onefile** flag to produce a single standalone executable with no support files. James was able to create a continuous-integration build for our project (on [Appveyor](http://www.appveyor.com/)), which fires every time we do a checkin and starts from a blank virtual machine on the cloud, loads all the necessary tools and builds everything, then runs tests.
+
+One caveat: we were able to do everything using Python's "batteries included" libraries, so I haven't experimented with bringing in external libraries, but I don't expect problems there. They have a list of packages that they [explicitly support](https://github.com/pyinstaller/pyinstaller/wiki/Supported-Packages), and I suspect that ordinary Python libraries will work just fine.
+
+But wait, there's more! PyInstaller does this magic for different operating systems! Not just Windows, but Linux and Mac OSX. You can read more [here](http://pythonhosted.org/PyInstaller/#overview-what-pyinstaller-does-and-how-it-does-it).
+
+## Simplifying Configuration, and format() ##
+
+Because James started with a **bash** script and he hasn't done a lot of bash programming, he followed the bad bash practice of using global variables all over the place, which you see as all uppercase identifiers. I took his script and translated it to Python which we then built into a Windows .EXE file.
+
+I'm reading [Writing Idiomatic Python](https://www.jeffknupp.com/writing-idiomatic-python-ebook/) which suggests using the **format()** function for string interpolation, so I gave it a try and quickly grew to like it. One thing that started to annoy me was passing it arguments; to use James' global variables and keep it all consistent, I was writing things like this:
+
+```python
+"My string with {THING_TO_SUBSTITUTE} in it".format(THING_TO_SUBSTITUTE=THING_TO_SUBSTITUTE)
+```
+Then I discovered that **format()** could take a dictionary and parse through it to find your particular arguments, and substitute those. So, if I put everything in a single dictionary, I could just pass that in to any **format()** like this:
+```python
+"My string with {THING_TO_SUBSTITUTE} in it".format(**cf)
+```
+Where **cf** is the configuration dictionary.
+
+This worked OK for awhile, but then I started to get bothered by having to write:
+```python
+cf["THING_TO_SUBSTITUTE"]
+```
+Everywhere. Too many characters, too noisy to write and read. What I wanted was the much simpler:
+```python
+cf.THING_TO_SUBSTITUTE
+```
+I discovered that by writing a quick subclass of **dict** I could accomplish this, and the results are:
+
+```python
+import os, platform, pprint
+
+class Configuration(dict):
+    def __getattr__(self, attr):
+        return self[attr]
+    def __setattr__(self, attr, val):
+        self[attr] = val
+
+cf = Configuration(
+    CLEANUP = os.getenv("LAUNCHER_CLEANUP"),
+    TRACE = os.getenv("LAUNCHER_TRACE"),
+    VERSION = None,
+    RAW_VERSION = None,
+    DOWNLOAD_PATH = None,
+    HOST="something.org",
+    DEFAULT_VERSION = "0.10.33",
+    OS = platform.system(),
+    ARCHITECTURE = platform.architecture()[0], # 64bit or 32bit
+    BASE_LOCAL_DIR = "{APPDATA}\\launcher".format(APPDATA=os.getenv("APPDATA")),
+    BIN = os.path.normpath("modules/bin/mod"),
+)
+
+cf.RAW_VERSION = "11.0.1"
+
+if cf.TRACE:
+    pprint.pprint(cf)
+
+print("host: {HOST}, OS: {OS}, arch: {ARCHITECTURE}".format(**cf))
+```
+Note that reading and writing the configuration variables is much nicer, and using them in a **format()** statement is quite elegant.
+
+Here's the output on one machine:
+```
+c:\tmp>set LAUNCHER_TRACE=1
+
+c:\tmp>python config.py
+{'ARCHITECTURE': '32bit',
+ 'BASE_LOCAL_DIR': 'C:\\Users\\Bruce Eckel\\AppData\\Roaming\\launcher',
+ 'BIN': 'modules\\bin\\mod',
+ 'CLEANUP': None,
+ 'DEFAULT_VERSION': '0.10.33',
+ 'DOWNLOAD_PATH': None,
+ 'HOST': 'something.org',
+ 'OS': 'Windows',
+ 'RAW_VERSION': '11.0.1',
+ 'TRACE': '1 ',
+ 'VERSION': None}
+host: something.org, OS: Windows, arch: 32bit
+```
+It might seem like a small thing, but I find that easier writing and reading of the code makes it worth it.
+
+
 
 
