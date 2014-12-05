@@ -192,6 +192,7 @@ print("host: {HOST}, OS: {OS}, arch: {ARCHITECTURE}".format(**cf))
 Note that reading and writing the configuration variables is much nicer, and using them in a **format()** statement is quite elegant.
 
 Here's the output on one machine:
+
 ```
 c:\tmp>set LAUNCHER_TRACE=1
 
