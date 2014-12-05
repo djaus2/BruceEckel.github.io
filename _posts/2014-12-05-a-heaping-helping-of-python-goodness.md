@@ -116,7 +116,7 @@ optional arguments:
 
 You'll notice that the arguments make this look like a kind of build program, which it is. I seem to reinvent **make**-like build tools on a regular basis, but **argparse** has me thinking that, with enough built-in tools like Python provides, I might not need a build framework --- perhaps all I need to do is use the tools to create a custom builder for each need.
 
-## Creating Standalone Executables with PyInstaller ##
+## 4. Creating Standalone Executables with PyInstaller ##
 
 Here's another problem that I've poked at for years --- well, looked at and decided it was too much trouble. And this week, discovered that someone has made it easy with [PyInstaller](https://github.com/pyinstaller/pyinstaller/wiki).
 
@@ -130,7 +130,7 @@ One caveat: we were able to do everything using Python's "batteries included" li
 
 But wait, there's more! PyInstaller does this magic for different operating systems! Not just Windows, but Linux and Mac OSX. You can read more [here](http://pythonhosted.org/PyInstaller/#overview-what-pyinstaller-does-and-how-it-does-it).
 
-## Simplifying Configuration, and format() ##
+## 5. Simplifying Configuration, and format() ##
 
 Because James started with a **bash** script and he hasn't done a lot of bash programming, he followed the bad bash practice of using global variables all over the place, which you see as all uppercase identifiers. I took his script and translated it to Python which we then built into a Windows .EXE file.
 
