@@ -109,7 +109,7 @@ Map(Goat -> Calico, Foo -> Zup, Frog -> Green)
 
 It works. It's clever and probably useful. But I worry about having to think this hard about something so apparently simple. It could be that I'm just not used to thinking "The Scala Way" yet. But it could also be that there are just a lot of special cases.
 
-For example, now that we are thinking this way --- that if something is immutable, you just create a **val** reference and Scala will synthesize **+=** and **-=** --- we encounter **Vector**, and suddenly what we thought was consistent is not. Because **Vector** (which doesn't have a mutable counterpart) *does not* synthesize **+=** and **-=**. Instead, you must explicitly perform the assignment part of those operations:
+For example, now that we are thinking this way --- that if something is immutable, you just create a **val** reference and Scala will synthesize **+=** and **-=** --- we encounter **Vector**, and suddenly what we thought was consistent is not. Because **Vector** (which doesn't have a mutable counterpart) *does not* synthesize **+=** and **-=**. Instead, you must apparently explicitly perform the assignment part of those operations:
 
 ```Scala
 // Solution-4.scala
@@ -120,19 +120,32 @@ var shapes = Vector("Round", "Rectangular", "Oblong")
 shapes = shapes :+ "Pointy" // Append at end
 shapes = "Ovoid" +: shapes // Insert at beginning
 shapes is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy)"
-shapes ++ "Sticky" is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, S, t, i, c, k, y)"
-shapes ++ Vector("Sticky") is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, Sticky)"
+shapes ++ "Sticky" is
+  "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, S, t, i, c, k, y)"
+shapes ++ Vector("Sticky") is
+  "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, Sticky)"
 // Works the other way around, as well:
-Vector("Sticky") ++ shapes is "Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)"
+Vector("Sticky") ++ shapes is
+  "Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)"
+
+// Wait, there ARE assignment-combination operators. Pretend the ':'
+// represents the collection (two dots represent two elements?) and the '+'
+// then shows which side you're attaching the new element onto:
+shapes +:= "Fat"
+shapes :+= "Skinny"
+shapes is "Vector(Fat, Ovoid, Round, Rectangular, Oblong, Pointy, Skinny)"
 
 /* OUTPUT_SHOULD_BE
 Vector(Ovoid, Round, Rectangular, Oblong, Pointy)
 Vector(Ovoid, Round, Rectangular, Oblong, Pointy, S, t, i, c, k, y)
 Vector(Ovoid, Round, Rectangular, Oblong, Pointy, Sticky)
 Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)
+Vector(Fat, Ovoid, Round, Rectangular, Oblong, Pointy, Skinny)
 */
-```
 
-Again, I'm sure there's a good reason for this (efficiency, most likely). But from the standpoint of the programmer, I'm confused. I don't have a consistent way to think about collections. Which means I'm going to have to look things up fairly often.
+```
+But wait, there IS an assignment-combination operator. It's just not shown in the docs for **Vector** or its base-class **AbstractSeq**. So it's one of the synthesized ones, apparently, and I'm supposed to remember that (1) assignment-combination operators get synthesized (2) they can be different for each class and (3) they don't show up in the docs.
+
+From the standpoint of the programmer, I'm confused. I don't have a consistent way to think about collections. Which means I'm going to have to look things up fairly often. Except when they aren't there, when I'll have to remember them. In the different ways that they might happen.
 
 Once, I could run circles around C++ operator overloading, which is complicated because you have to worry about storage allocation and release (garbage collectors eliminate those problems). I don't remember that like I once did because C++ must be backwards compatible with C, and that introduced arbitrary complications which are essential to the language implementation rather than being essential to what you're trying to accomplish with the language. That's what makes the details hard to remember. And I find that if I can't hold important issues in my head, it slows me down. So that's what concerns me.
