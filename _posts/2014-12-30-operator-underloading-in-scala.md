@@ -109,4 +109,30 @@ Map(Goat -> Calico, Foo -> Zup, Frog -> Green)
 
 It works. It's clever and probably useful. But I worry about having to think this hard about something so apparently simple. It could be that I'm just not used to thinking "The Scala Way" yet. But it could also be that there are just a lot of special cases.
 
+For example, now that we are thinking this way --- that if something is immutable, you just create a **val** reference and Scala will synthesize **+=** and **-=** --- we encounter **Vector**, and suddenly what we thought was consistent is not. Because **Vector** (which doesn't have a mutable counterpart) *does not* synthesize **+=** and **-=**. Instead, you must explicitly perform the assignment part of those operations:
+
+```Scala
+// Solution-4.scala
+// Solution to Exercise 4 in "References & Mutability"
+import com.atomicscala.AtomicTest._
+
+var shapes = Vector("Round", "Rectangular", "Oblong")
+shapes = shapes :+ "Pointy" // Append at end
+shapes = "Ovoid" +: shapes // Insert at beginning
+shapes is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy)"
+shapes ++ "Sticky" is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, S, t, i, c, k, y)"
+shapes ++ Vector("Sticky") is "Vector(Ovoid, Round, Rectangular, Oblong, Pointy, Sticky)"
+// Works the other way around, as well:
+Vector("Sticky") ++ shapes is "Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)"
+
+/* OUTPUT_SHOULD_BE
+Vector(Ovoid, Round, Rectangular, Oblong, Pointy)
+Vector(Ovoid, Round, Rectangular, Oblong, Pointy, S, t, i, c, k, y)
+Vector(Ovoid, Round, Rectangular, Oblong, Pointy, Sticky)
+Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)
+*/
+```
+
+Again, I'm sure there's a good reason for this (efficiency, most likely). But from the standpoint of the programmer, I'm confused. I don't have a consistent way to think about collections. Which means I'm going to have to look things up fairly often.
+
 Once, I could run circles around C++ operator overloading, which is complicated because you have to worry about storage allocation and release (garbage collectors eliminate those problems). I don't remember that like I once did because C++ must be backwards compatible with C, and that introduced arbitrary complications which are essential to the language implementation rather than being essential to what you're trying to accomplish with the language. That's what makes the details hard to remember. And I find that if I can't hold important issues in my head, it slows me down. So that's what concerns me.
