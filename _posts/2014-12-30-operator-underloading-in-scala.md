@@ -49,10 +49,9 @@ m -= "Cow"
 m is "Map(Foo -> Bar, Frog -> Green)"
 
 /* The '+' and '-' parts of '+=' and '-=' cause a new Map to be
-   created, and the '=' part assigns that new map to m, which works
-   because m is a var. Try changing it to a val and see what happens.
-   But the original Map object is not modified, as you can see here:
-*/
+created, and the '=' part assigns that new map to m, which works
+because m is a var. Try changing it to a val and see what happens.
+But the original Map object is not modified, as you can see here: */
 original is "Map(Foo -> Bar)"
 
 /* OUTPUT_SHOULD_BE
@@ -61,6 +60,7 @@ Map(Foo -> Bar, Frog -> Green, Cow -> Brown)
 Map(Foo -> Bar, Frog -> Green)
 Map(Foo -> Bar)
 */
+
 ```
 
 Once we realize what's happening, it does kind of make sense. And **Map**'s immutability is not violated, while still allowing what we want to accomplish with the **+=** and **-=**.
@@ -81,18 +81,18 @@ m is "Map(Foo -> Zup)"
 m("Goat") = "Calico" // Adds a new pair
 m is "Map(Goat -> Calico, Foo -> Zup)"
 
-// From our logic in Solution-1c.scala, this SHOULDN'T work.
-// But it does! NOW what's going on?
+// From our logic in Solution-1c.scala, this SHOULDN'T work. But it
+// does! NOW what's going on?
 m += ("Frog" -> "Green")
 m += ("Cow" -> "Brown")
 m is "Map(Goat -> Calico, Foo -> Zup, Frog -> Green, Cow -> Brown)"
 m -= "Cow"
 m is "Map(Goat -> Calico, Foo -> Zup, Frog -> Green)"
 
-/* In Solution-1c.scala, the += wasn't overloaded for the immutable Map,
-   so Scala synthesized it by first applying '+' and then '='. But there
-   IS a += defined for the mutable Map, so that is called in this case.
-*/
+/* In Solution-1c.scala, the += wasn't overloaded for the immutable
+Map, so Scala synthesized it by first applying '+' and then '='.
+But there IS a += defined for the mutable Map, so that is called in
+this case. */
 
 // Note that here, the original IS being directly modified:
 original is "Map(Goat -> Calico, Foo -> Zup, Frog -> Green)"
@@ -105,6 +105,7 @@ Map(Goat -> Calico, Foo -> Zup, Frog -> Green, Cow -> Brown)
 Map(Goat -> Calico, Foo -> Zup, Frog -> Green)
 Map(Goat -> Calico, Foo -> Zup, Frog -> Green)
 */
+
 ```
 
 It works. It's clever and probably useful. But I worry about having to think this hard about something so apparently simple. It could be that I'm just not used to thinking "The Scala Way" yet. But it could also be that there are just a lot of special cases.
@@ -129,8 +130,9 @@ Vector("Sticky") ++ shapes is
   "Vector(Sticky, Ovoid, Round, Rectangular, Oblong, Pointy)"
 
 // Wait, there ARE assignment-combination operators. Pretend the ':'
-// represents the collection (two dots represent two elements?) and the '+'
-// then shows which side you're attaching the new element onto:
+// represents the collection (two dots represent two elements?) and
+// the '+' then shows which side you're attaching the new element
+// onto:
 shapes +:= "Fat"
 shapes :+= "Skinny"
 shapes is "Vector(Fat, Ovoid, Round, Rectangular, Oblong, Pointy, Skinny)"
