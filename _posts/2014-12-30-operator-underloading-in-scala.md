@@ -146,6 +146,8 @@ Vector(Fat, Ovoid, Round, Rectangular, Oblong, Pointy, Skinny)
 ```
 But wait, there IS an assignment-combination operator. It's just not shown in the docs for **Vector** or its base-class **AbstractSeq**. So it's one of the synthesized ones, apparently, and I'm supposed to remember that (1) assignment-combination operators get synthesized (2) they can be different for each class and (3) they don't show up in the docs.
 
+It wouldn't be so bad if there was an alternative named method for **+:=**, **:+=** etc., which you could use instead (and would show up in the docs). But that this is the ONLY way to do it and it doesn't appear in the docs and nobody seems to think it's a problem --- that's a big problem.
+
 From the standpoint of the programmer, I'm confused. I don't have a consistent way to think about collections. Which means I'm going to have to look things up fairly often. Except when they aren't there, when I'll have to remember them. In the different ways that they might happen.
 
 Once, I could run circles around C++ operator overloading, which is complicated because you have to worry about storage allocation and release (garbage collectors eliminate those problems). I don't remember that like I once did because C++ must be backwards compatible with C, and that introduced arbitrary complications which are essential to the language implementation rather than being essential to what you're trying to accomplish with the language. That's what makes the details hard to remember. And I find that if I can't hold important issues in my head, it slows me down. So that's what concerns me.
