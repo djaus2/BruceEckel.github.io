@@ -3,7 +3,7 @@ layout: post
 published: true
 title: The Winter Tech Forum
 ---
-![Crested Butte in Winter, at night](http://i.imgur.com/wKw1lP6.jpg)
+![Crested Butte in Winter, at night](http://i.imgur.com/wKw1lP6.jpg "Crested Butte in Winter, at night")
 
 Although the Java Posse has ended transmission, we are still having the
 conference, renamed to the [Winter Tech Forum](http://wintertechforum.com) (yes, that's WTF -- because we're
