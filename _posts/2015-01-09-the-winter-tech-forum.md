@@ -4,7 +4,7 @@ published: true
 title: The Winter Tech Forum
 ---
 ![Crested Butte in Winter, at night](http://i.imgur.com/wKw1lP6.jpg "Crested Butte in Winter, at night (JC Leacock photo)")
-<caption style="font-size:50%">Photo courtesy <a href="http://www.jcleacock.com">JC Leacock</a></caption>
+<caption><span style="font-size:50%">Photo courtesy <a href="http://www.jcleacock.com">JC Leacock</a></span></caption>
 
 
 Although the Java Posse has ended transmission, we are still having the
