@@ -11,7 +11,7 @@ When I was younger I was willing to slog through the hard path to figure things 
 
 I recently had some nice success after volunteering to [build an app for someone](https://github.com/BruceEckel/Question-Of-The-Day) (my first app designed to run on a phone as well as other platforms), using Python's [Flask web app framework](http://flask.pocoo.org/) hosted on Heroku. Flask seems to me to be exceptionally well-designed and easy to use, so naturally I hoped I could somehow use websockets with Flask.
 
-It took a little poking around (with significant help from James Ward), but I got the basic example running successfully on Heroku. All the code and explanation is [here on Github](https://github.com/BruceEckel/hello-flask-websockets). 
+It took a little poking around (with significant help from [James Ward](http://www.jamesward.com/)), but I got the basic example running successfully on Heroku. All the code and explanation is [here on Github](https://github.com/BruceEckel/hello-flask-websockets). 
 
 
 
