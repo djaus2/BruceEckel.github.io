@@ -214,6 +214,20 @@ host: something.org, OS: Windows, arch: 32bit
 ```
 It might seem like a small thing, but I find that easier writing and reading of the code makes it worth it.
 
+## 6. pathlib is Excellent ##
+
+I've made plenty of use of the **os.path** library. It's very helpful, but it isn't intuitive. The new **pathlib** which was added in Python 3.4 abstracts paths to the point where they are intuitive, which was no simple design feat.
+
+Here's a simple example which renames a group of files scattered throughout subdirectories:
+
+```
+#! py -3
+from pathlib import Path
+
+for old in Path('.').glob("**/oldname.foo"):
+    old.rename(old.parent / "newname.bar")
+```
+I'm pretty sure that's the simplest solution to that problem that I've seen. Note the use of **'/'** to combine parts of paths. I've *always* wanted to do it that way.
 
 
 
