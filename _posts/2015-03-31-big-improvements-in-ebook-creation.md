@@ -35,6 +35,7 @@ Apple seems to have trouble playing nice in the open-source world. Although iOS 
 ```
 META-INF/com.apple.ibooks.display-options.xml
 ```
+
 Here's the file:
 
 ```
@@ -45,6 +46,7 @@ Here's the file:
   </platform>
 </display_options>
 ```
+
 I reported this as a Calibre bug, thinking they'd want to automatically put it in, but Kovid responded by saying that Calibre creates standards-compliant ePub and what Apple did here is non-standard. So you have to put it in yourself, but Calibre makes this pretty easy.
 
 Again, this only seems to be an issue when you are converting from **docx** files, and it's a pretty minor inconvenience compared with everything that Calibre does for you. I am extremely impressed with this program (which is written in Python).
