@@ -26,7 +26,7 @@ I thought I had a lot more work to do to get the epub and mobi versions for Atom
 
 **Note:** If you start with a Word document and save it as "filtered HTML" Calibre will do quite a good job on it. For a book with just text or relatively simple formatting, it should work fine (I had to process my HTML to get it just right, but most books don't have the formatting etc. requirements I do, and Calibre still did a remarkably good job with the raw HTML despite my issues). If you work with a word processor or other tool that produces really clean HTML directly then you're in even better shape.
 
-**What's even more amazing** is that Calibre can now start with a Microsoft Word **docx** document and directly convert it into ePub --- and really amazing ePub at that. Even including tables etc.. I was stunned, after having done it the hard way. This opens up some big possibilities for ebook publishing.
+**What's even more amazing** is that Calibre can now start with a Microsoft Word **docx** document and directly convert it into ePub --- and really amazing ePub at that. Even including tables, diagrams, etc. I was stunned, after having done it the hard way. This opens up some big possibilities for ebook publishing.
 
 ## iOS fix ##
 
