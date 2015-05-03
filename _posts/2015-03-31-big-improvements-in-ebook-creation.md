@@ -31,10 +31,12 @@ I thought I had a lot more work to do to get the epub and mobi versions for Atom
 ## iOS fix ##
 
 Apple seems to have trouble playing nice in the open-source world. Although iOS iBooks is a wonderful reader, if  you use Calibre to produce ePub from **docx**, you won't get the embedded fonts showing up on iBooks (for some reason, my HTML process for Atomic Scala *did not* produce this problem). After thrashing around for a few days I discovered that you must, after your epub is generated, insert a tiny XML file in this location:
+
 ```
 META-INF/com.apple.ibooks.display-options.xml
 ```
 Here's the file:
+
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <display_options>
