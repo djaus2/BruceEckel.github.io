@@ -25,3 +25,24 @@ As a last ditch, I thought I'd Google for something that might convert epub to m
 I thought I had a lot more work to do to get the epub and mobi versions for Atomic Scala 2nd edition, but these two programs just made it work like magic.
 
 **Note:** If you start with a Word document and save it as "filtered HTML" Calibre will do quite a good job on it. For a book with just text or relatively simple formatting, it should work fine (I had to process my HTML to get it just right, but most books don't have the formatting etc. requirements I do, and Calibre still did a remarkably good job with the raw HTML despite my issues). If you work with a word processor or other tool that produces really clean HTML directly then you're in even better shape.
+
+**What's even more amazing** is that Calibre can now start with a Microsoft Word **docx** document and directly convert it into ePub --- and really amazing ePub at that. Even including tables etc.. I was stunned, after having done it the hard way. This opens up some big possibilities for ebook publishing.
+
+## iOS fix ##
+
+Apple seems to have trouble playing nice in the open-source world. Although iOS iBooks is a wonderful reader, if  you use Calibre to produce ePub from **docx**, you won't get the embedded fonts showing up on iBooks (for some reason, my HTML process for Atomic Scala *did not* produce this problem). After thrashing around for a few days I discovered that you must, after your epub is generated, insert a tiny XML file in this location:
+```
+META-INF/com.apple.ibooks.display-options.xml
+```
+Here's the file:
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<display_options>
+  <platform name="*">
+    <option name="specified-fonts">true</option>
+  </platform>
+</display_options>
+```
+I reported this as a Calibre bug, thinking they'd want to automatically put it in, but Kovid responded by saying that Calibre creates standards-compliant ePub and what Apple did here is non-standard. So you have to put it in yourself, but Calibre makes this pretty easy.
+
+Again, this only seems to be an issue when you are converting from **docx** files, and it's a pretty minor inconvenience compared with everything that Calibre does for you. I am extremely impressed with this program (which is written in Python).
