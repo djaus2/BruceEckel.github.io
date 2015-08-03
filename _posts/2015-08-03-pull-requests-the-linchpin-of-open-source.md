@@ -32,7 +32,7 @@ project with the push of a button.
 For some reason, they chose to use the term “pull request” rather than “patch
 request.” For years this confused me and I just ignored it, thinking “well, if
 you want to pull something, pull it -- don’t bother asking me about it!” (This
-confusion is one big reason for the failure of the [Python Patterns book]).
+confusion is one big reason for the failure of the [Python Patterns book](<https://bitbucket.org/BruceEckel/python-3-patterns-idioms>)).
 
 At OSCON in the speaker room I overhead someone declaring that the pull request
 is the cornerstone of the open-source process. Along with my studies of
