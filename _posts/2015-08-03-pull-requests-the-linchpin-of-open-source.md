@@ -68,3 +68,5 @@ clear to contributors whether they’re on the same page as the project owner. I
 prevents the leaden morass that is consensus (unless a group of committers
 choose to practice it). The fork allows genetic variation within an open-source
 project, so the marketplace can choose the best-suited version.
+
+(*James Ward explained most of this to me*)
