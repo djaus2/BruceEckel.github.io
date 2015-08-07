@@ -17,8 +17,9 @@ title: "News, Readables, Viewables"
     philosophy](<https://www.youtube.com/watch?v=oYk8CKH7OhE>). This makes me
     want to learn Elm!
 
--   Kent Beck gives an amazing closing keynote. Something to aspire to, as a
-    speaker.
+-   Kent Beck gives an [amazing closing
+    keynote](<http://confreaks.tv/videos/railsconf2015-closing-keynote>).
+    Something to aspire to, as a speaker.
 
 -   Esther Derby’s [Six Rules for
     Change](<http://www.slideshare.net/estherderby/six-rulesforchangepdf>).
