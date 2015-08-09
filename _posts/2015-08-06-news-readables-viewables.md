@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: "News, Readables, Viewables"
 ---
 
@@ -15,7 +15,7 @@ title: "News, Readables, Viewables"
 
 -   The creator of the Elm language [about language design
     philosophy](<https://www.youtube.com/watch?v=oYk8CKH7OhE>). This makes me
-    want to learn Elm!
+    want to learn Elm.
 
 -   Kent Beck gives an [amazing closing
     keynote](<http://confreaks.tv/videos/railsconf2015-closing-keynote>).
