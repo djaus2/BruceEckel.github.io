@@ -32,7 +32,8 @@ project with the push of a button.
 For some reason, they chose to use the term “pull request” rather than “patch
 request.” For years this confused me and I just ignored it, thinking “well, if
 you want to pull something, pull it -- don’t bother asking me about it!” (This
-confusion is one big reason for the failure of the [Python Patterns book](<https://bitbucket.org/BruceEckel/python-3-patterns-idioms>)).
+confusion is one big reason for the failure of the [Python Patterns
+book](<https://bitbucket.org/BruceEckel/python-3-patterns-idioms>)).
 
 At OSCON in the speaker room I overhead someone declaring that the pull request
 is the cornerstone of the open-source process. Along with my studies of
@@ -68,5 +69,8 @@ clear to contributors whether they’re on the same page as the project owner. I
 prevents the leaden morass that is consensus (unless a group of committers
 choose to practice it). The fork allows genetic variation within an open-source
 project, so the marketplace can choose the best-suited version.
+
+Here’s a very nice [overview of the
+process](<https://guides.github.com/introduction/flow/>).
 
 (*James Ward explained most of this to me*)
