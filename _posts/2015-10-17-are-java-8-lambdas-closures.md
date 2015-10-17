@@ -90,24 +90,139 @@ print(list_y, yn)
 ```
 
 Notice that `func_to_return` manipulates two fields that are outside its
-scope: `x` and `alist`. The `nonlocal` declaration is required because of
+scope: `n` and `alist`. The `nonlocal` declaration is required because of
 the way Python works: if you just start using a variable, it assumes that
 variable is local. Here, the compiler (yes, Python has a compiler and yes,
 it actually does some -- admittedly quite limited -- static type checking)
-sees that `x += arg` uses `x` which, within the scope of `func_to_return`,
+sees that `n += arg` uses `n` which, within the scope of `func_to_return`,
 hasn't been initialized, and generates an error message. But if we say that
-`x` is `nonlocal`, Python realizes that we're using the `x` outside the
-function scope, and that `x` *has* been initialized, so it's OK. And even
-without the `nonlocal` declaration, it also recognizes that `alist` is a
-reference to a `list` and allows it (built-in collections get special
-treatment).
+`n` is `nonlocal`, Python realizes that we're using the `n` that's defined
+outside the function scope, and which *has* been initialized, so it's
+OK. And even without the `nonlocal` declaration, it also recognizes that
+`alist` is a reference to a `list` and allows it (built-in collections get
+special treatment).
 
 Now we encounter the problem: if we simply return `func_to_return`, what
-happens to `x` and `alist` which are outside the scope of `func_to_return`?
+happens to `n` and `alist` which are outside the scope of `func_to_return`?
 Ordinarily we'd expect those elements to go out of scope and become
 unavailable, but if that happens then `func_to_return` won't work. In order
 to support dynamic creation of functions, `func_to_return` must "close
-over" both `x` and `alist` when it's returned, and that's what happens --
+over" both `n` and `alist` when it's returned, and that's what happens --
 thus the term *closure*.
 
-To test `make_fun()`, we call it twice and capture the resulting function in `x` and `y`.
+To test `make_fun()`, we call it twice and capture the resulting function
+in `x` and `y`. Because `func_to_return` produces a tuple, we unpack the
+tuple into `list_x` and `xn` by saying `list_x, xn = x(i)`. The fact that
+`x` and `y` produce completely different results shows that each call to
+`make_fun()` produces a completely independent `func_to_return` with
+completely independent closed-over storage for `n` and `alist`.
+
+## Java 8 Lambdas
+
+Now let's see what the same example looks like with lambdas. We'll start
+with *just* the `List` outside the function scope:
+
+```java
+// AreLambdasClosures.java
+import java.util.function.*;
+import java.util.*;
+
+public class AreLambdasClosures {
+    public Function<Integer, List<Integer>> make_fun() {
+        // Outside the scope of the returned function:
+        List<Integer> alist = new ArrayList<>();
+        return arg -> { alist.add(arg); return alist; };
+    }
+    public void try_it() {
+        Function<Integer, List<Integer>> x = make_fun();
+        Function<Integer, List<Integer>> y = make_fun();
+        List<Integer> list_x = null;
+        for(int i = 0; i < 10; i++)
+            list_x = x.apply(i);
+        System.out.println(list_x);
+        List<Integer> list_y = null;
+        for(int i = 10; i < 20; i++)
+            list_y = y.apply(i);
+        System.out.println(list_y);
+    }
+    public static void main(String[] args) {
+        new AreLambdasClosures().try_it();
+    }
+}
+/* Output:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+*/
+```
+
+This is a fairly straightforward translation of the Python version:
+
+1. `make_fun()` returns a `Function` object, which takes an `Integer`
+argument and returns a `List<Integer>`. `x` and `y` require identical
+definitions.
+
+2. I use shorthands in the lambda: no parentheses around the single
+argument and type inference.
+
+The results are the same as the Python version, showing that Java 8 lambdas
+do indeed close over the elements in their surrounding *lexical scope*, and
+thus lambdas are closures.
+
+There is a difference from the Python version, however. Lambdas only close
+over *values* (references), but not variables. So when we try the closure
+over `n`, we get:
+
+```java
+// AreLambdasClosures2.java
+import java.util.function.*;
+
+public class AreLambdasClosures2 {
+    public Consumer<Integer> make_fun2() {
+        Integer n = 0; // Also true for int n
+        return arg -> n += arg;
+        // error: local variables referenced
+        // from a lambda expression must
+        // be final or effectively final
+    }
+}
+```
+
+You might expect `Integer` to produce a reference to a heap object, so is
+this a mistake or a bug? No: both `int` and `Integer` get special treatment
+as stack-based variables (the compiler has the option of doing this, and
+apparently it will tell us, as it does above, when it happens). And the
+argument goes that in a pure functional language there are no variables,
+only values, so it's unreasonable to expect lambdas to close over
+variables.
+
+How do we fix the problem? By forcing the object to be on the heap. For
+example:
+
+```java
+// AreLambdasClosures3.java
+import java.util.function.*;
+
+class myInt {
+    int i = 0;
+}
+
+public class AreLambdasClosures3 {
+    public Consumer<Integer> make_fun2() {
+        myInt n = new myInt();
+        return arg -> n.i += arg;
+    }
+}
+```
+
+This compiles without complaint.
+
+So Java 8 lambdas have closure behavior -- and will tell us when it
+doesn't, so we can fix the problem. For me, it accomplishes the desired
+goal: it's now possible to create functions dynamically.
+
+I asked why the feature wasn't just called closures instead of lambdas,
+since it has the characteristics of a closure? The answer I got was that
+closure is a loaded and ill defined term, and was likely to create more
+heat than light. When someone says "real closures," it only means "what
+closure meant in the first language I encountered with something called
+closures."
