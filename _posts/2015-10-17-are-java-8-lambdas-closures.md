@@ -30,7 +30,8 @@ actually accomplish everything with values that you can with variables (you
 can prove this to yourself using Scala, which is itself *not* a pure
 functional language but has the option to use values everywhere). Invariant
 functions take arguments and produce results without modifying their
-environment, and thus are much easier to use for parallel programming.
+environment, and thus are much easier to use for parallel programming
+because an invariant function doesn't have to lock shared resources.
 
 Before Java 8, the only way to create functions at runtime in Java was
 through bytecode generation and loading (which quite messy and complex).
@@ -46,20 +47,19 @@ Closures concern this second issue.
 
 ## What is a Closure?
 
-A closure solves the problem of a function using variables that are outside
-of the function scope. This is not a problem in traditional procedural
-programming -- you just use the variable -- but when you start producing
-functions at runtime it becomes a problem. To see the issue, I'll start
-with a Python example. Here, `make_fun()` is creating and returning a
-function called `func_to_return`, which is then used by the rest of the
-program:
+A closure uses variables that are outside of the function scope. This is
+not a problem in traditional procedural programming -- you just use the
+variable -- but when you start producing functions at runtime it does
+become a problem. To see the issue, I'll start with a Python example. Here,
+`make_fun()` is creating and returning a function called `func_to_return`,
+which is then used by the rest of the program:
 
 ```python
 # Closures.py
 
 def make_fun():
     # These are outside the scope of the returned function:
-    alist = []
+    alist = [] # this creates an empty list
     n = 0
 
     def func_to_return(arg):
@@ -68,7 +68,7 @@ def make_fun():
         # local variable 'n' referenced before assignment
         n += arg
         alist.append(arg)
-        return (alist, n)
+        return alist, n  # Returns a tuple
 
     return func_to_return
 
@@ -103,12 +103,12 @@ OK. And even without the `nonlocal` declaration, it also recognizes that
 special treatment).
 
 Now we encounter the problem: if we simply return `func_to_return`, what
-happens to `n` and `alist` which are outside the scope of `func_to_return`?
-Ordinarily we'd expect those elements to go out of scope and become
-unavailable, but if that happens then `func_to_return` won't work. In order
-to support dynamic creation of functions, `func_to_return` must "close
-over" both `n` and `alist` when it's returned, and that's what happens --
-thus the term *closure*.
+happens to `n` and `alist`, which are outside the scope of
+`func_to_return`? Ordinarily we'd expect those elements to go out of scope
+and become unavailable, but if that happens then `func_to_return` won't
+work. In order to support dynamic creation of functions, `func_to_return`
+must "close over" both `n` and `alist` when it's returned, and that's what
+happens -- thus the term *closure*.
 
 To test `make_fun()`, we call it twice and capture the resulting function
 in `x` and `y`. Because `func_to_return` produces a tuple, we unpack the
@@ -159,7 +159,7 @@ This is a fairly straightforward translation of the Python version:
 
 1. `make_fun()` returns a `Function` object, which takes an `Integer`
 argument and returns a `List<Integer>`. `x` and `y` require identical
-definitions.
+`Function` definitions.
 
 2. I use shorthands in the lambda: no parentheses around the single
 argument and type inference.
@@ -189,11 +189,11 @@ public class AreLambdasClosures2 {
 
 You might expect `Integer` to produce a reference to a heap object, so is
 this a mistake or a bug? No: both `int` and `Integer` get special treatment
-as stack-based variables (the compiler has the option of doing this, and
-apparently it will tell us, as it does above, when it happens). And the
-argument goes that in a pure functional language there are no variables,
-only values, so it's unreasonable to expect lambdas to close over
-variables.
+as stack-based variables (the compiler has the option of putting things on
+the stack, and apparently it will tell us, as it does above, when this
+happens). And the argument goes that in a pure functional language there
+are no variables, only values, so it's unreasonable to expect lambdas to
+close over variables.
 
 How do we fix the problem? By forcing the object to be on the heap. For
 example:
@@ -220,7 +220,7 @@ So Java 8 lambdas have closure behavior -- and will tell us when it
 doesn't, so we can fix the problem. For me, it accomplishes the desired
 goal: it's now possible to create functions dynamically.
 
-I asked why the feature wasn't just called closures instead of lambdas,
+I asked why the feature wasn't just called "closures" instead of "lambdas,"
 since it has the characteristics of a closure? The answer I got was that
 closure is a loaded and ill defined term, and was likely to create more
 heat than light. When someone says "real closures," it only means "what
