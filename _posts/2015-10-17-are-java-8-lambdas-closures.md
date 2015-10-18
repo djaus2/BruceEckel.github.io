@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Are Java 8 Lambdas Closures?
 ---
 
@@ -11,11 +11,56 @@ yes.
 For the longer answer, we must first explore the question of "why, again,
 are we doing all this?"
 
+## Abstraction over Behavior
+
+The simplest way to look at the need for lambdas is that they describe
+*what* computation should be performed, rather than *how* it should be
+performed. Traditionally, we've used *external iteration*, where we specify
+exactly how to step through a sequence and perform operations:
+
+```java
+// InternalVsExternalIteration.java
+import java.util.*;
+
+interface Pet {
+    void speak();
+}
+
+class Rat implements Pet {
+    public void speak() { System.out.println("Squeak!"); }
+}
+
+class Frog implements Pet {
+    public void speak() { System.out.println("Ribbit!"); }
+}
+
+public class InternalVsExternalIteration {
+    public static void main(String[] args) {
+        List<Pet> pets = Arrays.asList(new Rat(), new Frog());
+        for(Pet p : pets) // External iteration
+            p.speak();
+        pets.forEach(Pet::speak); // Internal iteration
+    }
+}
+```
+
+The `for` loop represents external iteration and specifies exactly how it
+is done. This kind of code is redundant, and duplicated throughout our
+programs. With the `forEach`, however, we tell it to call `speak` (here,
+using a method reference which is more succinct than a lambda) for each
+element, but we don't have to specify how the loop works. The iteration is
+handled internally, inside the `forEach`.
+
+This "what not how" is the basic motivation for lambdas. But to understand
+closures, we must look more deeply, into the motivation for functional
+programming itself.
+
 ## Functional Programming
 
 Lambdas/Closures are there to aid functional programming. Java 8 is not
 suddenly a functional programming language, but (like Python) now has some
-support for functional programming.
+support for functional programming on top of its basic object-oriented
+paradigm.
 
 The core idea of functional programming is that you can create and
 manipulate functions, including creating functions at runtime. Thus,
@@ -33,8 +78,8 @@ functions take arguments and produce results without modifying their
 environment, and thus are much easier to use for parallel programming
 because an invariant function doesn't have to lock shared resources.
 
-Before Java 8, the only way to create functions at runtime in Java was
-through bytecode generation and loading (which quite messy and complex).
+Before Java 8, the only way to create functions at runtime was through
+bytecode generation and loading (which quite messy and complex).
 
 Lambdas provide two basic features:
 
@@ -107,8 +152,8 @@ happens to `n` and `alist`, which are outside the scope of
 `func_to_return`? Ordinarily we'd expect those elements to go out of scope
 and become unavailable, but if that happens then `func_to_return` won't
 work. In order to support dynamic creation of functions, `func_to_return`
-must "close over" both `n` and `alist` when it's returned, and that's what
-happens -- thus the term *closure*.
+must "close over" and keep alive both `n` and `alist` when it's returned,
+and that's what happens -- thus the term *closure*.
 
 To test `make_fun()`, we call it twice and capture the resulting function
 in `x` and `y`. Because `func_to_return` produces a tuple, we unpack the
@@ -162,7 +207,7 @@ argument and returns a `List<Integer>`. `x` and `y` require identical
 `Function` definitions.
 
 2. I use shorthands in the lambda: no parentheses around the single
-argument and type inference.
+argument, and type inference.
 
 The results are the same as the Python version, showing that Java 8 lambdas
 do indeed close over the elements in their surrounding *lexical scope*, and
@@ -223,6 +268,16 @@ goal: it's now possible to create functions dynamically.
 I asked why the feature wasn't just called "closures" instead of "lambdas,"
 since it has the characteristics of a closure? The answer I got was that
 closure is a loaded and ill defined term, and was likely to create more
-heat than light. When someone says "real closures," it only means "what
-closure meant in the first language I encountered with something called
-closures."
+heat than light. When someone says "real closures," it too often means
+"what closure meant in the first language I encountered with something
+called closures."
+
+I don't see an OO versus FP (functional programming) debate here; that is
+not my intention. Indeed, I don't really see a "versus" issue. OO is good
+for abstracting over data (and just because Java forces objects on you
+doesn't mean that objects are the answer to every problem), while FP is
+good for abstracting over behavior. Both paradigms are useful, and mixing
+them together has been even more useful for me, both in Python and now in
+Java 8. (I have also recently been using Pandoc, written in the pure FP
+Haskell language, and I've been extremely impressed with that, so it
+seems there is a valuable place for pure FP languages as well).
