@@ -25,7 +25,7 @@ All the numbers and discussions about time and memory refer to "my machine."
 Your experience will probably be different.
 
 ```java
-// tasks/Summing.java
+// Summing.java
 import java.util.stream.*;
 import java.util.function.*;
 
@@ -115,7 +115,7 @@ we'll run into garbage collection timing issues.
 First we'll try an array filled with primitive `long`s:
 
 ```java
-// tasks/Summing2.java
+// Summing2.java
 import java.util.*;
 
 public class Summing2 {
@@ -168,7 +168,7 @@ statements about what to do, other than "you have to try it out."
 Finally, consider the effect of using wrapped `Long`s instead:
 
 ```java
-// tasks/Summing3.java
+// Summing3.java
 import java.util.*;
 
 public class Summing3 {
@@ -217,7 +217,7 @@ I separated the `parallel()` version because running it inside the above program
 caused a lengthy garbage collection, distorting the results:
 
 ```java
-// tasks/Summing4.java
+// Summing4.java
 import java.util.*;
 
 public class Summing4 {
