@@ -17,7 +17,7 @@ measures the length of the `getAsLong()` call, compares the result with a
 `checkValue` and displays the results. It also assigns the `result` to a
 volatile value just in case Java is tempted to optimize away the calculation.
 
-Note that everything must rigorously use `long`s whereever possible; I spent a
+Note that everything rigorously uses `long`s whereever possible; I spent a
 bit of time chasing down quiet overflows before realizing that I missed 'long's
 in important places.
 
