@@ -44,10 +44,29 @@ adapting structure between the world of open-source and the world of business.
 Release Bounties
 ----------------
 
-bounty usually based on the effort you and your group put in
+Here's how it works. For projects that create significant releases containing
+distinct new features[^It might work in other situations as well but that is
+not how I'm initially imagining it], on your next release you set a funding
+bounty. Typically this bounty will be based on the amount of effort you put
+into the release, but other factors can weigh in as well, such as trying to
+hire a new person for the project or paying back debts you've incurred in
+developing the project thus far. In my opinion it is valuable to be completely
+transparent about the needs provided by the bounty, because it helps engage
+customers in the process.
 
-amounts are probably different for individuals and companies, and companies might pay
-according to how big they are or some other factors
+I think most projects will want to set different prices for individual users
+than for companies. One thing to keep in mind is that companies can have
+complex procurement processes so you need to factor in the time and effort
+involved (see later in this article about the benefit of having a service to
+manage these issues). A typical way to charge a company might be based on
+number of programmers or employees in the company. Sometimes you'll have to
+work out a special contract with that company, but if the result is beneficial
+enough it's worth it.
+
+Every time someone pays for the new release, the bounty is reduced by that amount.
+Once the bounty is paid off, the release becomes free to everyone. This way,
+customers who don't care or can't afford it have the option of waiting until
+the release becomes free. For customers that need
 
 you can even provide premiums like stickers, shirts or hats for individuals who are extra enthusiastic
 
