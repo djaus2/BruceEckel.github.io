@@ -1,7 +1,7 @@
 ---
 layout: post
-published: false
-title: A Model To Fund Open-source Projects
+published: true
+title: A Model To Fund Open-Source Projects
 ---
 
 Synopsis
@@ -9,8 +9,8 @@ Synopsis
 
 Place a bounty on the next release of an open-source project. Until the bounty
 is met, those who need/want the newest release must pay an amount in order to
-get it. Previous releases remain free during the bounty period. Once the
-bounty is met, the new release becomes free.
+get it. Previous releases remain free. Once the bounty is met, the new release
+becomes free.
 
 The Problem of Funding
 ----------------------
@@ -38,8 +38,9 @@ like needless work to the purchasing department. They're not being stingy or
 mean---it's just that everything else has higher priority than doing something
 that isn't forced upon you. That's just the way old-school business works.
 
-Eventually cultural norms might develop, but in the meantime we need to provide an
-adapting structure between the world of open-source and the world of business.
+Eventually cultural norms might develop, but in the meantime we need to
+provide an adapting structure between the world of open-source and the world
+of business.
 
 Release Bounties
 ----------------
@@ -63,12 +64,12 @@ number of programmers or employees in the company. Sometimes you'll have to
 work out a special contract with that company, but if the result is beneficial
 enough it's worth it.
 
-Every time someone pays for the new release, the bounty is reduced by that amount.
-Once the bounty is paid off, the release becomes free to everyone. This way,
-customers who don't care or can't afford it have the option of waiting until
-the release becomes free. Customers that need it right away will pay for it.
-The rate at which the bounty is paid off gives feedback to the developers about
-how valuable the new feature set is.
+Every time someone pays for the new release, the bounty is reduced by that
+amount. Once the bounty is paid off, the release becomes free to everyone.
+This way, customers who don't care or can't afford it have the option of
+waiting until the release becomes free. Customers that need it right away will
+pay for it. The rate at which the bounty is paid off gives feedback to the
+developers about how valuable the new feature set is.
 
 You might even provide premiums like stickers, shirts, hats, etc., for
 individuals who are extra enthusiastic about the project and want to donate at
@@ -84,7 +85,7 @@ they can devote all their time to working on their open-source projects. I
 believe this will dramatically speed up software development in general,
 because more people will be able to work on the projects they love.
 
-This mechanism also provides valuable feedback from your customers. Just like
+This mechanism also provides valuable feedback from your customers. Similar to
 systems like KickStarter (which doesn't fund you unless your minimum goal is
 reached, thus telling you whether there's enough interest in your project),
 paying down a bounty gives customers more investment in what features you
@@ -97,7 +98,7 @@ once there's a payment mechanism in place it becomes much easier for a company
 to budget, request, and pay for new feature sets.
 
 One very significant benefit is that you don't have to estimate. You create
-the feature set first, and then you know how much time it took to create it
+the feature set first, and then you know how much effort it took to create it
 and that tells you what the bounty is. It might also incentivize you to make
 smaller, more frequent releases. I think it will certainly encourage you to
 discover and add the features that people want to pay for, and thus provides a
@@ -105,25 +106,26 @@ valuable form of feedback.
 
 This system might even provide funding for an organization like the PSF. If
 the PSF were to create and host the infrastructure for this service, they
-could take a percentage for doing so (and I think folks in the Python  open-
-source community would be enthusiastic in providing another way to fund the
-PSF, so the percentage could probably be higher than what Kickstarter, for
+could take a percentage for doing so (and I think folks in the Python
+open-source community would be enthusiastic in providing another way to fund
+the PSF, so the percentage could probably be higher than what Kickstarter, for
 example, charges). Under the umbrella of the PSF, payments made to open-source
 projects might even qualify as nonprofit donations, which could enable you to
 charge more to companies since they then benefit from a tax break. In
 addition, the PSF is probably better equipped to handle the procurement
-paperwork for companies, and once that process was completed for the PSF, all
-bounty payments for projects under the PSF could be made through that pre-
-existing account, making it much easier and faster for the company.
+paperwork for companies, and once that process was completed for the PSF,
+bounty payments for all projects under the PSF could be made through that 
+pre-existing account, making it much easier and faster for the company.
 
 Other products might be enabled using this approach. If there's a need for
 online training, for example, the current open-source approach doesn't free up
 time for the developers to work on it, especially if they have regular jobs.
 You might (openly) add something to the current bounty to help support the
-development of such materials, then create a new bounty on those materials
-once they've been created (or you might choose to always charge something for
-your online training even if it's been funded through a bounty, but people who
-want it will appreciate its existence either way).
+development of such materials (perhaps hiring someone to do it), then create a
+new bounty on those materials once they've been created (or you might choose
+to always charge something for your online training even if it's been funded
+through a bounty---people who want it will appreciate its existence either
+way).
 
 Summary
 -------
@@ -137,7 +139,7 @@ Because all previous versions of the open-source project are free, this allows
 individuals and companies to choose whether they want or need the newest version,
 or if they are fine waiting for the bounty to be paid by others.
 
-This approach might also enable things like sponsorship for a version. One
+This approach could also enable things like sponsorship for a version. One
 company might decide it wants to pay off the entire bounty and the developers
 might give that company some kind of public acknowledgement.
 
