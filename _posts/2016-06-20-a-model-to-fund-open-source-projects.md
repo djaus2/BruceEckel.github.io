@@ -114,7 +114,7 @@ projects might even qualify as nonprofit donations, which could enable you to
 charge more to companies since they then benefit from a tax break. In
 addition, the PSF is probably better equipped to handle the procurement
 paperwork for companies, and once that process was completed for the PSF,
-bounty payments for all projects under the PSF could be made through that 
+bounty payments for all projects under the PSF could be made through that
 pre-existing account, making it much easier and faster for the company.
 
 Other products might be enabled using this approach. If there's a need for
@@ -164,5 +164,5 @@ project might never reach fruition. For that we probably need to draw on the
 wisdom earned both from venture investing and services like Kickstarter.
 
 I might have been able to think of this approach because of my [Reinventing
-Business](Reinventing-Business.com) project. That project has certainly
-changed the way I look at possibilities in the world.
+Business](http://www.reinventing-business.com/) project. That project has
+certainly changed the way I look at possibilities in the world.
