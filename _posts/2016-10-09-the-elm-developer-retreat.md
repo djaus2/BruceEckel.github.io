@@ -14,6 +14,7 @@ Forum](http://www.WinterTechForum.com).
 
 1. We all agreed that developer retreats are great, and we will continue doing
 them and evolving the format.
+
     A. For one thing, it's much, much easier to figure things out in a group.
 
 1. This is the second themed retreat (versus the very first un-themed retreat
@@ -46,7 +47,9 @@ post.
 1. We tried Google Spaces. It's nice and easy but has a number of drawbacks
 compared to Slack that were show-stoppers for us. So at the Winter Tech Forum
 we'll continue using Slack, unless something better shows up in the meantime.
+
     A. Messages can only be 170 characters.
+
     B. You can't do code snippets like you can in Slack.
 
 Resources
