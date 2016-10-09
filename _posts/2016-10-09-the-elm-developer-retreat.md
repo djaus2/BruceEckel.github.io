@@ -52,6 +52,10 @@ we'll continue using Slack, unless something better shows up in the meantime.
 
     B. You can't do code snippets like you can in Slack.
 
+1. Someone on the Elm Slack channel suggested that there be some way to allow
+remote participation, even if it's just to set up a dedicated Slack channel. In
+the past I've also had requests to set up a web cam. This merits investigation.
+
 Resources
 ---------
 
