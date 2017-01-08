@@ -1,7 +1,7 @@
 ---
 layout: post
 published: true
-title: A Canonical `equals()` For Java
+title: A Canonical equals() For Java
 ---
 
 > Even with the help of Java 7's `Objects.equals()`, the `equals()` method often
