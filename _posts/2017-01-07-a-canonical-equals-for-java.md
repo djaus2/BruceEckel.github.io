@@ -16,7 +16,7 @@ equal to this object:
 1.  If the **rval** is `null`, it's not equal.
 
 2.  If the **rval** is `this` (you're comparing yourself to yourself),
-    the two objects are equl.
+    the two objects are equal.
 
 3.  If the **rval** is not the same class or subclass, the two objects are not
     equal.
@@ -28,7 +28,7 @@ Java 7 introduced the `Objects` class to help with this process, which we use
 to write a better `equals()`.
 
 The following examples compare different versions of the `Equality` class. To
-prevent duplicate code we'll build the examples using the *Factory* method
+prevent duplicate code we'll build the examples using the *Factory Method*
 design pattern. The `EqualityFactory` interface simply provides a `make()`
 method to produce an `Equality` object, so a different `EqualityFactory` can
 produce a different subtype of `Equality`:
@@ -124,7 +124,7 @@ Expected false, got false
 ```
 
 `testAll()` performs comparisons with all different types of objects we ever
-expect to encounter.
+expect to encounter. It creates `Equality` objects using the factory.
 
 In `main()`, notice the simplicity of the call to `testAll()`. Because
 `EqualityFactory` has a single method, it can be used with a lambda expression
