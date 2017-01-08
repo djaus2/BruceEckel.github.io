@@ -135,7 +135,8 @@ simplify it into a canonical form. Observe:
 
 1.  The `instanceof` check eliminates the need to test for `null`
 
-2.  The comparison to `this` is unneccessary.
+2.  The comparison to `this` is redundant. A correctly-written `equals()` will
+    work properly with self comparison.
 
 Because `&&` is a short-circuiting comparison, it quits and produces `false`
 the first time it encounters a failure. So, by chaining the checks together
