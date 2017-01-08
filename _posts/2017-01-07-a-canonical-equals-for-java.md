@@ -9,7 +9,7 @@ title: A Canonical equals() For Java
 > write a succinct `equals()` in a format that allows easy checking with visual
 > inspection.
 
-There are a number of checks you must ensure to properly determing whether the
+There are a number of checks you must perform to properly determine whether the
 object you're comparing yourself to (which we'll call here the **rval**) is
 equal to this object:
 
