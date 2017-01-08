@@ -4,9 +4,10 @@ published: true
 title: A Canonical equals() For Java
 ---
 
-> Even with the help of Java 7's `Objects.equals()`, the `equals()` method often
-> being verbose and messy. This article shows how you can write a succinct `equals()`
-> in a format that allows easy checking with visual inspection.
+> Even with the help of Java 7's `Objects.equals()`, the `equals()` method is often
+> written in a verbose and messy fashion. This article shows how you can
+> write a succinct `equals()` in a format that allows easy checking with visual
+> inspection.
 
 There are a number of checks you must ensure to properly determing whether the
 object you're comparing yourself to (which we'll call here the **rval**) is
