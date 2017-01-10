@@ -38,10 +38,10 @@ false
 */
 ```
 
-Normally you'll want to relax this restriction. Typically, if two objects have
-fields with identical values, you'll consider those objects equal, but there
-may also be fields that you don't want to include in the `equals()` comparison.
-This is part of the class design process.
+Normally you'll want to relax this restriction. Typically, if two objects are
+the same type and have fields with identical values, you'll consider those
+objects equal, but there may also be fields that you don't want to include in
+the `equals()` comparison. This is part of the class design process.
 
 A proper `equals()` must satisfy the following five conditions:
 
