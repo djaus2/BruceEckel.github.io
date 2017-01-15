@@ -6,7 +6,15 @@ title: Constructors Are Not Thread-Safe
 
 When you imagine the construction process, it can be easy to think that it's
 thread-safe. After all, no one can even see the new object before it finishes
-initialization, so how could there be contention over that object?
+initialization, so how could there be contention over that object? Indeed,
+the [Java Language
+specification](http://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.8.3)
+(JLS) confidently states:
+
+*"There is no practical need for a constructor to be synchronized, because it
+would lock the object under construction, which is normally not made available
+to other threads until all constructors for the object have completed their
+work."*
 
 Unfortunately, object construction is as vulnerable to shared-memory concurrency
 problems as anything else. The mechanisms can be more subtle, however.
@@ -103,8 +111,8 @@ public class TestStaticIDField {
 */
 ```
 
-That's a rather large number of duplicates. Clearly, a plain `static int` is not
-safe to use for construction. Let's make it thread-safe using an
+That's a rather large number of duplicates. Clearly, a plain `static int` is
+not safe to use for construction. Let's make it thread-safe using an
 `AtomicInteger`:
 
 ```java
@@ -126,7 +134,7 @@ public class GuardedIDField implements HasID {
 ```
 
 Constructors have an even more subtle way to share state: through constructor
-arguments.
+arguments:
 
 ```java
 // SharedConstructorArgument.java
@@ -160,10 +168,10 @@ class SharedUser implements HasID {
 
 public class SharedConstructorArgument {
   public static void main(String[] args) {
-    Unsafe us = new Unsafe();
-    IDChecker.test(() -> new SharedUser(us));
-    Safe sa = new Safe();
-    IDChecker.test(() -> new SharedUser(sa));
+    Unsafe unsafe = new Unsafe();
+    IDChecker.test(() -> new SharedUser(unsafe));
+    Safe safe = new Safe();
+    IDChecker.test(() -> new SharedUser(safe));
   }
 }
 /* Output:
@@ -176,6 +184,42 @@ Here, the `SharedUser` constructors share the same argument. Even though
 `SharedUser` is using its argument in a completely innocent and reasonable
 fashion, *the way the constructor is called* causes collisions. `SharedUser`
 cannot even know it is being used this way, much less control it!
+
+`synchronized` constructors are not supported by the language, but it's
+possible to create your own using a `synchronized` block. Although the
+JLS states that "... *it would lock the object under construction*", this is
+not true---the constructor is effectively a `static` method, so a
+`synchronized` constructor would actually lock through the *class* object. We
+can reproduce this by creating our own `static` object and locking on that:
+
+```java
+// SynchronizedConstructor.java
+import java.util.concurrent.atomic.*;
+
+class SyncConstructor implements HasID {
+  private final int id;
+  private static Object constructorLock = new Object();
+  public SyncConstructor(SharedArg sa) {
+    synchronized(constructorLock) {
+      id = sa.get();
+    }
+  }
+  @Override
+  public int getID() { return id; }
+}
+
+public class SynchronizedConstructor {
+  public static void main(String[] args) {
+    Unsafe unsafe = new Unsafe();
+    IDChecker.test(() -> new SyncConstructor(unsafe));
+  }
+}
+/* Output:
+0
+*/
+```
+
+The shared use of the `Unsafe` class is now safe.
 
 These examples emphasize how insidiously difficult it is to detect and manage
 shared state in concurrent Java programs. Even if you take the "share nothing"
