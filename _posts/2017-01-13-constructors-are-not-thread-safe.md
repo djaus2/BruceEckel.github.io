@@ -221,6 +221,41 @@ public class SynchronizedConstructor {
 
 The shared use of the `Unsafe` class is now safe.
 
+An alternate approach is to make the constructors `private` (thus preventing
+inheritance) and provide a `static` *Factory Method* to produce new objects:
+
+```java
+// SynchronizedFactory.java
+import java.util.concurrent.atomic.*;
+
+class SyncFactory implements HasID {
+  private final int id;
+  private SyncFactory(SharedArg sa) {
+    id = sa.get();
+  }
+  @Override
+  public int getID() { return id; }
+  public static synchronized
+  SyncFactory factory(SharedArg sa) {
+    return new SyncFactory(sa);
+  }
+}
+
+public class SynchronizedFactory {
+  public static void main(String[] args) {
+    Unsafe unsafe = new Unsafe();
+    IDChecker.test(() ->
+      SyncFactory.factory(unsafe));
+  }
+}
+/* Output:
+0
+*/
+```
+
+By synchronizing the `static` *Factory Method* you lock on the class object
+during construction.
+
 These examples emphasize how insidiously difficult it is to detect and manage
 shared state in concurrent Java programs. Even if you take the "share nothing"
 strategy, it's remarkably easy for accidental sharing to take place.
