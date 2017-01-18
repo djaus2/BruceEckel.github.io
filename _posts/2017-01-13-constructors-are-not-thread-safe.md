@@ -222,7 +222,7 @@ public class SynchronizedConstructor {
 The shared use of the `Unsafe` class is now safe.
 
 An alternate approach is to make the constructors `private` (thus preventing
-inheritance) and provide a `static` *Factory Method* to produce new objects:
+inheritance) and provide a `static` Factory Method to produce new objects:
 
 ```java
 // SynchronizedFactory.java
@@ -253,7 +253,7 @@ public class SynchronizedFactory {
 */
 ```
 
-By synchronizing the `static` *Factory Method* you lock on the class object
+By synchronizing the `static` Factory Method you lock on the class object
 during construction.
 
 These examples emphasize how insidiously difficult it is to detect and manage
