@@ -24,7 +24,7 @@ I've rolled the book out very slowly; for the last couple of months it's been
 in beta to make sure there were no glitches in the delivery or reading
 experience, but it is now officially released.
 
-You can find it at [www.OnJava8.com](www.OnJava8.com).
+You can find it at [www.OnJava8.com](http://onjava8.com).
 
 This book is far too large to publish as a single print volume, and my intent
 has always been to only publish it as an eBook. Color syntax highlighting for
@@ -47,7 +47,7 @@ benefits far outweigh the discomfort of adapting.
 I've done the research, and Google Play Books provides a very nice reading
 experience on every platform, including Linux and iOS devices. As an
 experiment, I've decided to try publishing exclusively through [Google
-Books](www.OnJava8.com).
+Books](http://onjava8.com).
 
 # The Concurrent Python Developer Retreat
 
