@@ -56,8 +56,8 @@ of Fluent Python), and afterwards he'll be coming with me to my home in
 Crested Butte, Colorado where we'll be holding the Concurrent Python Developer
 retreat, July 16-19 2017. This will focus on all the aspects of concurrency in
 Python, as part of the development work for my book project [Concurrent
-Python](www.ConcurrentPython.com). This will be a free ebook, available now
+Python](http://www.ConcurrentPython.com). This will be a free ebook, available now
 and throughout development (it might also turn into a print book if the
 interest is there). The target audience is people who know Python but don't
 know anything about concurrency, so if that's you, please consider joining the
-retreat. You can find out more, and register, [here](www.Developer-Retreat.com).
+retreat. You can find out more, and register, [here](http://www.Developer-Retreat.com).
