@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Gophercon And The Concurrent Python Developer Retreat
 ---
 
@@ -27,19 +27,19 @@ from what you get by attending. Sure, there are the occasional opportunities
 for meeting new folks. Meals are probably the best for this, because you need to
 sit somewhere and that tends to produce new connections. The conference parties
 are intended to achieve this, but these basically throw you into a big noisy
-space with food and games, and rely on you to start conversations. A few
+space with food and possibly games, and rely on you to start conversations. A few
 thoughtful (and free) touches would catalyze the connections that people at the
 conference clearly want to make.
 
 Here's an example. I mentioned my observations to Luciano, and before I knew it
 he had spontaneously created an open-spaces conference at one of the tables,
-simply by making a sign on that table about "Pythonistas who love Go" and
+simply by making a sign on that table reading "Pythonistas who love Go" and
 tweeting about it. The people who showed up were hungry for this conversation
 and I think there could have been a lot more of this. Instead, if people weren't
 interested in what was going on or the talk they wanted to see was too crowded,
 they ended up working on their own at one of the tables. I loved Luciano's
-guerilla tactic and will try something like that myself if I end up in a similar
-situation.
+tactic and will try something like that myself if I end up in a similar
+situation -- I'll call it *guerilla open spaces*.
 
 We stayed for part of the "community day," an optional post-conference event
 when everyone really started to connect. This was, to my perception, the
@@ -48,7 +48,9 @@ kind of potential this conference really has. It was also an opportunity for
 open-source project sprinting, but as was discovered long ago at Pycon, one day
 doesn't do it. In fact, you're lucky if you get people up to speed with tools
 and the project on the first day, which is why Pycon has four post-conference
-sprint days.
+sprint days (I only sprinted for a couple of days last year, three days this
+year, and next year I will stay the whole four days -- the experience and learnings
+I've gotten from sprinting has just been fantastic).
 
 A lot of people had either completely come over from Python or were programming
 in both Python and Go. A number of speakers told this story. My impression was
@@ -81,11 +83,12 @@ you're solving; you just use goroutines for everything. Thus, more Pythonic:
 one obvious way to do it.
 
 I was especially interested in the [grpc](https://grpc.io/) cross-language
-bridge. There was a presentation that used this, and they have working examples,
-one of which is Python to Go, which I tested on my Windows 10 machine. The
-`grpc` unboxing experience was seamless and exceptionally good, which means I'll
-probably explore it further when I need high-speed foreign-function calls.
-There's a certain attraction to using something supported by Google.
+bridge. There was a presentation that used this, and the grpc intro pages have
+working examples, one of which is Python to Go, which I tested on my Windows
+10 machine. The `grpc` unboxing experience was seamless and exceptionally
+good, which means I'll probably explore it further when I need high-speed
+foreign-function calls. There's a certain attraction to using something
+supported by Google.
 
 However, during the developer retreat, Jim Fulton told us about
 [MessagePack](http://msgpack.org/) which has a [cross-language RPC
@@ -133,22 +136,50 @@ used it for anything, but during workshops like this it's priceless to be able
 to have anyone in the room quickly and easily cast their desktop to the TV. We
 used it almost constantly during this developer retreat.
 
-Location of the repository. Remember we were in full exploration mode; pull
-requests welcome.
+## The Projects
 
-One of the more illuminating days was the last one. We had been implementing
-the photo-blurring problem using various techniques, and Jim Fulton kept
-mentioning Rust. Jim had implemented a ZODB server in Rust a year before, so
-it seemed like an ideal opportunity to learn more about this language. Lots of
-people seem to use the refrain "I don't know much about Rust but it sounds
-interesting and I'd like to explore it more." So I asked Jim if he'd be
-willing to work through the photo-blurring problem in Rust and he agreed.
+> All these projects reside in the [Concurrent Python Github
+Repository](https://github.com/ConcurrentPython).
+
+As previously mentioned, Python tends to partition concurrency into async and
+parallel, so we came up with projects to test those approaches.
+
+The first was based on something I've been thinking of for awhile. I enjoy
+webcomics but the reading tools require too much mousing-and-clicking. In
+addition, while they originally might open the comic directly in the reader,
+it turns out that the artists often only get paid if you open the page (and
+the associated ads) on the supporting site.
+
+So the first project used asynch calls to open a list of pages, opening each
+in a tab when it became available. In
+[WebComicReader](https://github.com/ConcurrentPython/WebComicReader) you'll
+see multiple Python files, each containing the different approaches we tried,
+including basic async/await, concurrent futures, and gevent. Not everything
+worked, or worked easily, or produced the results we expected (Remember we
+were in full exploration mode; pull requests welcome).
+
+To explore parallelism, Luciano came up with the idea of grabbing some images
+and performing CPU-intensive image processing on them -- we chose the
+application of a blur filter. Various solutions are in the [Parallel Image
+Processing](https://github.com/ConcurrentPython/Parallel_Image_Processing)
+repository. `linear.py` just does them one at a time, to show the longest
+possible processing duration, while the other two experiment with parallel
+versions.
+
+One of the more illuminating days was the last one. As we implemented the
+photo-blurring problem using various techniques, Jim kept mentioning Rust. Jim
+had implemented a ZODB server in Rust a year before, so it seemed like an
+ideal opportunity to learn more about this language. Lots of people seem to
+use the refrain "I don't know much about Rust but it sounds interesting and
+I'd like to explore it more." So I asked Jim if he'd be willing to work
+through the photo-blurring problem in Rust and he agreed.
 
 The first interesting thing was setup. Jim worked on this for awhile before
 he just built the environment in a Docker container. This showed that Rust
 is still in flux; there seemed to be language feature error messages that
 popped up around libraries unless you had exactly the right combination
-of compiler and tools; I think we ended up using the nightly build.
+of compiler and tools; I think we ended up using the nightly build. It seems
+like just getting set up could be quite daunting for a novice.
 
 Jim hadn't done much with Rust in the past year, but before that he had built a
 fairly complex piece of software. In the intervening year, many of the details
@@ -186,6 +217,11 @@ it wasn't clear that the performance was faster than the other approaches. This
 might well be due to a poor implementation of the Rust image processing library
 we used, but after all the work it would be pretty disappointing to discover
 that a solution in Go or even Python was around the same speed or even faster.
+
+You can find the Rust implementation of the image processor
+[here](https://github.com/ConcurrentPython/rust-image). Jim put this up a few
+days after the conference, and it now looks deceptively much simpler than
+what we were seeing during development.
 
 Rust is not the language I'm seeking because it's not a rapid-development
 solution, so I'm putting it on the back shelf for the time being. I can
