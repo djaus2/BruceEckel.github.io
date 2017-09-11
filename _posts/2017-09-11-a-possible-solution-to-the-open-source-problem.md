@@ -1,7 +1,7 @@
 ---
 layout: post
 published: true
-title: A Possible Solution To The Open Source Problem
+title: A Possible Solution To The Open Source Funding Problem
 ---
 
 William Gross has posted [Give Away Your Code, But Never Your
@@ -17,7 +17,7 @@ We've been solving all these other problems around open source, but not the
 essential one: how can people get paid for developing open-source software. I
 believe this is fundamentally important to the future of our field, because
 open source has proven the ability to produce much, much better software than
-that produced in a hierarchically-based industrial-age organization.
+that produced in hierarchical industrial-age organizations.
 
 Solve this problem, and we'll see an explosion of value like we've never imagined.
 
