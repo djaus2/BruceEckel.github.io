@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>A Canonical equals() For Java</title>
+
+  
+  
+
+
+
+
+  
+  <meta name="author" content="Bruce Eckel" />
+  <meta name="description" content="Even with the help of Java 7&amp;rsquo;s Objects.equals(), the equals() method is often written in a verbose and messy fashion. This article shows how you can write a succinct equals() in a format that allows easy checking with visual inspection.
+ When you create a new class, it automatically inherits class Object. If you don&amp;rsquo;t override equals(), you&amp;rsquo;ll get Objects equals() method. By default this compares addresses, so only if you are comparing the exact same objects will you get true." />
+
+  
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@BruceEckel" />
+    <meta name="twitter:title" content="A Canonical equals() For Java" />
+    <meta name="twitter:description" content="Even with the help of Java 7&amp;rsquo;s Objects.equals(), the equals() method is often written in a verbose and messy fashion. This article shows how you can write a succinct equals() in a format that allows easy checking with visual inspection.
+ When you create a new class, it automatically inherits class Object. If you don&amp;rsquo;t override equals(), you&amp;rsquo;ll get Objects equals() method. By default this compares addresses, so only if you are comparing the exact same objects will you get true." />
+    <meta name="twitter:image" content="http://bruceeckel.github.io/img/avatar.jpg" />
+  
+
+
+
+
+<meta name="generator" content="Hugo 0.25" />
+
+
+<link rel="canonical" href="http://bruceeckel.github.io/2017/01/07/a-canonical-equals-for-java/" />
+<link rel="alternative" href="/index.xml" title="Computing Thoughts" type="application/atom+xml" />
+
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+
+
+<meta name="robots" content="index,follow" />
+<meta name="referrer" content="origin-when-cross-origin" />
+
+
+
+
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Computing Thoughts" />
+<meta name="msapplication-tooltip" content="Computing Thoughts" />
+<meta name='msapplication-navbutton-color' content="#5fbf5e" />
+<meta name="msapplication-TileColor" content="#5fbf5e" />
+<meta name="msapplication-TileImage" content="/img/tile-image-windows.png" />
+<link rel="icon" href="/img/favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
+<link rel="icon" sizes="192x192" href="/img/touch-icon-android.png" />
+<link rel="apple-touch-icon" href="/img/touch-icon-apple.png" />
+<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5fbf5e" />
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/video.js/6.2.8/alt/video-js-cdn.min.css" />
+
+<link rel="stylesheet" href="/css/bundle.css" />
+
+
+  
+  <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="//cdn.bootcss.com/video.js/6.2.8/ie8/videojs-ie8.min.js"></script>
+  <![endif]-->
+
+<!--[if lte IE 11]>
+    <script src="//cdn.bootcss.com/classlist/1.1.20170427/classList.min.js"></script>
+  <![endif]-->
+
+
+<script src="//cdn.bootcss.com/object-fit-images/3.2.3/ofi.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/smooth-scroll/12.1.4/js/smooth-scroll.polyfills.min.js"></script>
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a title="Go to top" class="to-top is-hide"><span class="icon icon-up"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="/img/avatar.jpg" alt="Avatar">
+  
+  <h2 class="title">Computing Thoughts</h2>
+  
+  <p class="subtitle">Bruce Eckel&#39;s Programming Blog</p>
+  <button class="menu-toggle" type="button">
+    <span class="icon icon-menu"></span>
+  </button>
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list">
+
+      
+      <li class="social-item">
+        <a href="mailto:mindviewinc@gmail.com" title="Email"><span class="icon icon-email"></span></a>
+      </li>
+
+      
+      <li class="social-item">
+        <a href="//github.com/BruceEckel" title="GitHub"><span class="icon icon-github"></span></a>
+      </li>
+
+      <li class="social-item">
+        <a href="//twitter.com/BruceEckel" title="Twitter"><span class="icon icon-twitter"></span></a>
+      </li>
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <li class="social-item">
+        <a href="/index.xml"><span class="icon icon-rss" title="RSS"></span></a>
+      </li>
+
+    </ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">A Canonical equals() For Java</h1>
+      <p class="post-meta">@Bruce Eckel · Jan 7, 2017 · 11 min read</p>
+    </header>
+    <article class="post-content">
+
+<blockquote>
+<p>Even with the help of Java 7&rsquo;s <code>Objects.equals()</code>, the <code>equals()</code> method is often
+written in a verbose and messy fashion. This article shows how you can
+write a succinct <code>equals()</code> in a format that allows easy checking with visual
+inspection.</p>
+</blockquote>
+
+<p>When you create a new class, it automatically inherits class <code>Object</code>. If you
+don&rsquo;t override <code>equals()</code>, you&rsquo;ll get <code>Object</code>s <code>equals()</code> method. By default
+this compares addresses, so only if you are comparing the <em>exact same</em> objects
+will you get <code>true</code>. The default case is the &ldquo;most discriminating.&rdquo;</p>
+
+<pre><code class="language-java">// DefaultComparison.java
+
+class DefaultComparison {
+  private int i, j, k;
+  public DefaultComparison(int i, int j, int k) {
+    this.i = i;
+    this.j = j;
+    this.k = k;
+  }
+  public static void main(String[] args) {
+    DefaultComparison
+      a = new DefaultComparison(1, 2, 3),
+      b = new DefaultComparison(1, 2, 3);
+    System.out.println(a == a);
+    System.out.println(a == b);
+  }
+}
+/* Output:
+true
+false
+*/
+</code></pre>
+
+<p>Normally you&rsquo;ll want to relax this restriction. Typically, if two objects are
+the same type and have fields with identical values, you&rsquo;ll consider those
+objects equal, but there may also be fields that you don&rsquo;t want to include in
+the <code>equals()</code> comparison. This is part of the class design process.</p>
+
+<p>A proper <code>equals()</code> must satisfy the following five conditions:</p>
+
+<ol>
+<li><p>Reflexive: For any <code>x</code>, <code>x.equals(x)</code> should return <code>true</code>.</p></li>
+
+<li><p>Symmetric: For any <code>x</code> and <code>y</code>, <code>x.equals(y)</code> should return <code>true</code> if and
+only if <code>y.equals(x)</code> returns <code>true</code>.</p></li>
+
+<li><p>Transitive: For any <code>x</code>, <code>y</code>, and <code>z</code>, if <code>x.equals(y)</code> returns <code>true</code>
+and <code>y.equals(z)</code> returns <code>true</code>, then <code>x.equals(z)</code> should return <code>true</code>.</p></li>
+
+<li><p>Consistent: For any <code>x</code> and <code>y</code>, multiple invocations of <code>x.equals(y)</code>
+consistently return <code>true</code> or consistently return <code>false</code>, provided no
+information used in equals comparisons on the object is modified.</p></li>
+
+<li><p>For any non-<code>null x</code>, <code>x.equals(null)</code> should return <code>false</code>.</p></li>
+</ol>
+
+<p>Here are the tests that satisfy those conditions and determine whether the
+object you&rsquo;re comparing yourself to (which we&rsquo;ll call here the <strong>rval</strong>) is
+equal to this object:</p>
+
+<ol>
+<li><p>If the <strong>rval</strong> is <code>null</code>, it&rsquo;s not equal.</p></li>
+
+<li><p>If the <strong>rval</strong> is <code>this</code> (you&rsquo;re comparing yourself to yourself),
+the two objects are equal.</p></li>
+
+<li><p>If the <strong>rval</strong> is not the same class or subclass, the two objects are not
+equal.</p></li>
+
+<li><p>If all the above checks pass, then you must decide which fields in the
+<strong>rval</strong> are important (and consistent), and compare those.</p></li>
+</ol>
+
+<p>Java 7 introduced the <code>Objects</code> class to help with this process, which we use
+to write a better <code>equals()</code>.</p>
+
+<p>The following examples compare different versions of the <code>Equality</code> class. To
+prevent duplicate code we&rsquo;ll build the examples using the <em>Factory Method</em>. The
+<code>EqualityFactory</code> interface simply provides a <code>make()</code> method to produce an
+<code>Equality</code> object, so a different <code>EqualityFactory</code> can produce a different
+subtype of <code>Equality</code>:</p>
+
+<pre><code class="language-java">// EqualityFactory.java
+import java.util.*;
+
+interface EqualityFactory {
+  Equality make(int i, String s, double d);
+}
+</code></pre>
+
+<p>Now we&rsquo;ll define <code>Equality</code> containing three fields (all of which we consider
+important during comparison) and an <code>equals()</code> method that fulfills the four
+checks described above. The constructor displays its type name to ensure we are
+performing the tests we think we are:</p>
+
+<pre><code class="language-java">// Equality.java
+import java.util.*;
+
+public class Equality {
+  protected int i;
+  protected String s;
+  protected double d;
+  public Equality(int i, String s, double d) {
+    this.i = i;
+    this.s = s;
+    this.d = d;
+    System.out.println(&quot;made 'Equality'&quot;);
+  }
+  @Override
+  public boolean equals(Object rval) {
+    if(rval == null)
+      return false;
+    if(rval == this)
+      return true;
+    if(!(rval instanceof Equality))
+      return false;
+    Equality other = (Equality)rval;
+    if(!Objects.equals(i, other.i))
+      return false;
+    if(!Objects.equals(s, other.s))
+      return false;
+    if(!Objects.equals(d, other.d))
+      return false;
+    return true;
+  }
+  public void
+  test(String descr, String expected, Object rval) {
+    System.out.format(&quot;-- Testing %s --%n&quot; +
+      &quot;%s instanceof Equality: %s%n&quot; +
+      &quot;Expected %s, got %s%n&quot;,
+      descr, descr, rval instanceof Equality,
+      expected, equals(rval));
+  }
+  public static void testAll(EqualityFactory eqf) {
+    Equality
+      e = eqf.make(1, &quot;Monty&quot;, 3.14),
+      eq = eqf.make(1, &quot;Monty&quot;, 3.14),
+      neq = eqf.make(99, &quot;Bob&quot;, 1.618);
+    e.test(&quot;null&quot;, &quot;false&quot;, null);
+    e.test(&quot;same object&quot;, &quot;true&quot;, e);
+    e.test(&quot;different type&quot;, &quot;false&quot;, new Integer(99));
+    e.test(&quot;same values&quot;, &quot;true&quot;, eq);
+    e.test(&quot;different values&quot;, &quot;false&quot;, neq);
+  }
+  public static void main(String[] args) {
+    testAll( (i, s, d) -&gt; new Equality(i, s, d));
+  }
+}
+/* Output:
+made 'Equality'
+made 'Equality'
+made 'Equality'
+-- Testing null --
+null instanceof Equality: false
+Expected false, got false
+-- Testing same object --
+same object instanceof Equality: true
+Expected true, got true
+-- Testing different type --
+different type instanceof Equality: false
+Expected false, got false
+-- Testing same values --
+same values instanceof Equality: true
+Expected true, got true
+-- Testing different values --
+different values instanceof Equality: true
+Expected false, got false
+*/
+</code></pre>
+
+<p><code>testAll()</code> performs comparisons with all different types of objects we ever
+expect to encounter. It creates <code>Equality</code> objects using the factory.</p>
+
+<p>In <code>main()</code>, notice the simplicity of the call to <code>testAll()</code>. Because
+<code>EqualityFactory</code> has a single method, it can be used with a lambda expression
+as the <code>make()</code> method.</p>
+
+<p>The above <code>equals()</code> method is annoyingly verbose, and it turns out we can
+simplify it into a canonical form. Observe:</p>
+
+<ol>
+<li><p>The <code>instanceof</code> check eliminates the need to test for <code>null</code></p></li>
+
+<li><p>The comparison to <code>this</code> is redundant. A correctly-written <code>equals()</code> will
+work properly with self comparison.</p></li>
+</ol>
+
+<p>Because <code>&amp;&amp;</code> is a short-circuiting comparison, it quits and produces <code>false</code>
+the first time it encounters a failure. So, by chaining the checks together
+with <code>&amp;&amp;</code>, we can write <code>equals()</code> much more succinctly:</p>
+
+<pre><code class="language-java">// SuccinctEquality.java
+import java.util.*;
+
+public class SuccinctEquality extends Equality {
+  public SuccinctEquality(int i, String s, double d) {
+    super(i, s, d);
+    System.out.println(&quot;made 'SuccinctEquality'&quot;);
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof SuccinctEquality &amp;&amp;
+      Objects.equals(i, ((SuccinctEquality)rval).i) &amp;&amp;
+      Objects.equals(s, ((SuccinctEquality)rval).s) &amp;&amp;
+      Objects.equals(d, ((SuccinctEquality)rval).d);
+  }
+  public static void main(String[] args) {
+    Equality.testAll( (i, s, d) -&gt;
+      new SuccinctEquality(i, s, d));
+  }
+}
+/* Output:
+made 'Equality'
+made 'SuccinctEquality'
+made 'Equality'
+made 'SuccinctEquality'
+made 'Equality'
+made 'SuccinctEquality'
+-- Testing null --
+null instanceof Equality: false
+Expected false, got false
+-- Testing same object --
+same object instanceof Equality: true
+Expected true, got true
+-- Testing different type --
+different type instanceof Equality: false
+Expected false, got false
+-- Testing same values --
+same values instanceof Equality: true
+Expected true, got true
+-- Testing different values --
+different values instanceof Equality: true
+Expected false, got false
+*/
+</code></pre>
+
+<p>For each <code>SuccinctEquality</code>, the base-class constructor is called before the
+derived-class constructor. The output shows that we still get the correct
+result. You can tell that short-circuiting happens because both the <code>null</code>
+test and the &ldquo;different type&rdquo; test would otherwise throw exceptions during
+the casts that occur further down the list of comparisons in <code>equals()</code>.</p>
+
+<p><code>Objects.equals()</code> shines when you compose your new class using another class:</p>
+
+<pre><code class="language-java">// ComposedEquality.java
+import java.util.*;
+
+class Part {
+  String ss;
+  double dd;
+  public Part(String ss, double dd) {
+    this.ss = ss;
+    this.dd = dd;
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof Part &amp;&amp;
+      Objects.equals(ss, ((Part)rval).ss) &amp;&amp;
+      Objects.equals(dd, ((Part)rval).dd);
+  }
+}
+
+public class ComposedEquality extends SuccinctEquality {
+  Part part;
+  public ComposedEquality(int i, String s, double d) {
+    super(i, s, d);
+    part = new Part(s, d);
+    System.out.println(&quot;made 'ComposedEquality'&quot;);
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof ComposedEquality &amp;&amp;
+      super.equals(rval) &amp;&amp;
+      Objects.equals(part, ((ComposedEquality)rval).part);
+  }
+  public static void main(String[] args) {
+    Equality.testAll( (i, s, d) -&gt;
+      new ComposedEquality(i, s, d));
+  }
+}
+/* Output:
+made 'Equality'
+made 'SuccinctEquality'
+made 'ComposedEquality'
+made 'Equality'
+made 'SuccinctEquality'
+made 'ComposedEquality'
+made 'Equality'
+made 'SuccinctEquality'
+made 'ComposedEquality'
+-- Testing null --
+null instanceof Equality: false
+Expected false, got false
+-- Testing same object --
+same object instanceof Equality: true
+Expected true, got true
+-- Testing different type --
+different type instanceof Equality: false
+Expected false, got false
+-- Testing same values --
+same values instanceof Equality: true
+Expected true, got true
+-- Testing different values --
+different values instanceof Equality: true
+Expected false, got false
+*/
+</code></pre>
+
+<p>Notice the call to <code>super.equals()</code>&mdash;no need to reinvent it (plus you don&rsquo;t
+always have access to all necessary parts of a base class).</p>
+
+<h3 id="equality-across-subtypes">Equality Across Subtypes</h3>
+
+<p>Inheritance suggests that objects of two different subtypes can be &ldquo;the same&rdquo;
+when they are upcast. Suppose you have a collection of <code>Pet</code> objects. This
+collection will naturally accept subtypes of <code>Pet</code>: In this example, <code>Dog</code>s and
+<code>Pig</code>s. Each <code>Pet</code> has a <code>name</code> and a <code>size</code>, as well as a unique internal <code>id</code>
+number.</p>
+
+<p>We define <code>equals()</code> and <code>hashCode()</code> using the canonical form via the
+<code>Objects</code> class, but we only define them in the base class <code>Pet</code>, and we do not
+include the unique <code>id</code> number in either one. From the standpoint of
+<code>equals()</code>, this means we only care if something is a <code>Pet</code>, not whether it is
+a specific type of <code>Pet</code>:</p>
+
+<pre><code class="language-java">// SubtypeEquality.java
+import java.util.*;
+
+enum Size { SMALL, MEDIUM, LARGE }
+
+class Pet {
+  private static int counter = 0;
+  private final int id = counter++;
+  private final String name;
+  private final Size size;
+  public Pet(String name, Size size) {
+    this.name = name;
+    this.size = size;
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof Pet &amp;&amp;
+      // Objects.equals(id, ((Pet)rval).id) &amp;&amp; // [1]
+      Objects.equals(name, ((Pet)rval).name) &amp;&amp;
+      Objects.equals(size, ((Pet)rval).size);
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, size);
+    // return Objects.hash(name, size, id);  // [2]
+  }
+  @Override
+  public String toString() {
+    return String.format(&quot;%s[%d]: %s %s %x&quot;,
+      getClass().getSimpleName(), id,
+      name, size, hashCode());
+  }
+}
+
+class Dog extends Pet {
+  public Dog(String name, Size size) {
+    super(name, size);
+  }
+}
+
+class Pig extends Pet {
+  public Pig(String name, Size size) {
+    super(name, size);
+  }
+}
+
+public class SubtypeEquality {
+  public static void main(String[] args) {
+    Set&lt;Pet&gt; pets = new HashSet&lt;&gt;();
+    pets.add(new Dog(&quot;Ralph&quot;, Size.MEDIUM));
+    pets.add(new Pig(&quot;Ralph&quot;, Size.MEDIUM));
+    pets.forEach(System.out::println);
+  }
+}
+/* Output:
+Dog[0]: Ralph MEDIUM a752aeee
+*/
+</code></pre>
+
+<p>If we are just thinking about types, it does make sense&mdash;sometimes&mdash;to only
+consider the classes from the standpoint of their base type, which is the
+foundation of the <em>Liskov Substitution Principle</em>. This code fits nicely with
+that principle because the derived types don&rsquo;t add any extra functionality
+(methods) that isn&rsquo;t in the base class. The derived types only differ in
+behavior, not in interface (which of course is not the general case).</p>
+
+<p>But when we provide two different object types with identical data and place
+them in a <code>HashSet&lt;Pet&gt;</code>, only one of these objects survives. This emphasizes
+that <code>equals()</code> is not a perfectly mathematical concept but (at least
+partially) a mechanical one. <code>hashCode()</code> and <code>equals()</code> must be defined
+hand-in-hand in order to allow types to work properly in a hashed data
+structure.</p>
+
+<p>In the example, both the <code>Dog</code> and <code>Pig</code> hash to the same bucket in the
+<code>HashSet</code>. At this point, the <code>HashSet</code> falls back to <code>equals()</code> to
+differentiate the objects, but <code>equals()</code> also declares the objects to be the
+same. The  <code>HashSet</code> doesn&rsquo;t add the <code>Pig</code> because it&rsquo;s already got an
+identical object.</p>
+
+<p>We can still make the example work by forcing uniqueness on otherwise identical
+objects. Here, each <code>Pet</code> already has a unique <code>id</code> so you can either uncomment
+line <strong>[1]</strong> in <code>equals()</code> or switch to line <strong>[2]</strong> in <code>hashCode()</code>. In the
+canonical form you would do both, to involve all &ldquo;unchanging&rdquo; fields in both
+operations (&ldquo;unchanging&rdquo; so that the <code>equals()</code> and <code>hashCode()</code> don&rsquo;t produce
+different values between storing and retrieving in a hashed data structure. I
+put &ldquo;unchanging&rdquo; in quotes because you must evaluate whether modification might
+happen).</p>
+
+<p><strong>Side note</strong>: in <code>hashCode()</code>, if you are only working with a single field, use
+<code>Objects.hashCode()</code> and if you are using multiple fields use <code>Objects.hash()</code>.</p>
+
+<p>We can also solve the issue by following the standard form and defining
+<code>equals()</code> in the subclasses (but still not including the unique <code>id</code>):</p>
+
+<pre><code class="language-java">// SubtypeEquality2.java
+import java.util.*;
+
+class Dog2 extends Pet {
+  public Dog2(String name, Size size) {
+    super(name, size);
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof Dog2 &amp;&amp;
+      super.equals(rval);
+  }
+}
+
+class Pig2 extends Pet {
+  public Pig2(String name, Size size) {
+    super(name, size);
+  }
+  @Override
+  public boolean equals(Object rval) {
+    return rval instanceof Pig2 &amp;&amp;
+      super.equals(rval);
+  }
+}
+
+public class SubtypeEquality2 {
+  public static void main(String[] args) {
+    Set&lt;Pet&gt; pets = new HashSet&lt;&gt;();
+    pets.add(new Dog2(&quot;Ralph&quot;, Size.MEDIUM));
+    pets.add(new Pig2(&quot;Ralph&quot;, Size.MEDIUM));
+    pets.forEach(System.out::println);
+  }
+}
+/* Output:
+Dog2[0]: Ralph MEDIUM a752aeee
+Pig2[1]: Ralph MEDIUM a752aeee
+*/
+</code></pre>
+
+<p>Notice that the <code>hashCode()</code>s are identical, but because the objects are no
+longer <code>equals()</code>, both now appear in the <code>HashSet</code>. Also, <code>super.equals()</code>
+means we don&rsquo;t need access to the <code>private</code> fields in the base class.</p>
+
+<p>One way to look at this is to say that Java separates substitutability from the
+definition of <code>equals()</code> and <code>hashCode()</code>. We can still place <code>Dog</code>s and <code>Pig</code>s
+into a <code>Set&lt;Pet&gt;</code> regardless of how <code>equals()</code> and <code>hashCode()</code> are defined,
+but the objects won&rsquo;t behave correctly in hashed data structures unless those
+methods are defined with hashed structures in mind. Unfortunately, <code>equals()</code>
+is not only used in conjunction with <code>hashCode()</code>. This complicates things when
+you try to avoid defining it for specific classes, and it&rsquo;s why it&rsquo;s worth
+following the canonical form. However, this is further complicated because
+there are times when you don&rsquo;t need to define either method.</p>
+</article>
+    <footer class="post-footer">
+      
+      <p class="post-copyright">
+        This post was published <strong>279</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  <footer class="site-footer">
+  <p>© 2017 Computing Thoughts</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank">Nuo</a>.</p>
+  
+</footer>
+
+
+
+<script async src="//cdn.bootcss.com/video.js/6.2.8/alt/video.novtt.min.js"></script>
+<script async src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\[','\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+<script src="/js/bundle.js"></script>
+
+
+
+
+  </body>
+</html>
