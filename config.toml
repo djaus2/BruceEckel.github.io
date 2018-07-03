@@ -1,4 +1,4 @@
-baseURL = "http://bruceeckel.github.io/"
+baseURL = "http://djaus2.github.io/"
 languageCode = "en-us"
 title = "Computing Thoughts"
 theme = "hugo-nuo"
@@ -20,10 +20,10 @@ PygmentsCodeFences = true
   url = "http://www.mindviewinc.com/About/Bruce.php"
 
 [[menu.main]]
-  name = "Mindview"
+  name = "Embedded01.com"
   weight = 20
-  identifier = "mindview"
-  url = "http://www.mindviewinc.com"
+  identifier = "embedded101"
+  url = "http://embedded101.com"
 
 [[menu.main]]
   name = "Atomic Scala"
@@ -39,12 +39,12 @@ PygmentsCodeFences = true
 
 # Add your own params here
 [params]
-  author = "Bruce Eckel"
+  author = "David Jones"
   avatar = "/img/BruceEckelPicture.png"
   seotitle = "Hugo Blog (SEO Version)"
-  subtitle = "Bruce Eckel's Programming Blog"
-  description = "A blog about all the things related to programming by Bruce Eckel, author of Thinking in Java, Thinking in C++, Atomic Scala and very soon Atomic Kotlin."
+  subtitle = "David Jones' Programming Blog"
+  description = "A blog about all the things related to programming by David Jones.
   paginate = 10
-  email = "mindviewinc@gmail.com"
-  github = "bruceeckel"
-  twitter = "bruceeckel"
+  email = "davidjones@sportronics.com.au"
+  github = "djaus2"
+  twitter = "cedriverwiz"
